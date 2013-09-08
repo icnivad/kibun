@@ -1,5 +1,5 @@
 # Django settings for kibun project.
-import local_settings
+from local_settings import *
 import os, sys
 
 myFilePath=os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
