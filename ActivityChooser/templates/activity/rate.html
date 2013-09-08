@@ -1,0 +1,35 @@
+{% load staticfiles %}
+
+<!DOCTYPE html>
+    <html>
+    <head>
+    <title>MoodToolkit</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Bootstrap -->
+    <link href="{% static 'bootstrap/css/bootstrap.min.css' %}" rel="stylesheet" media="screen">
+    </head>
+    <body>
+        <div class="navbar navbar-inverse">
+		<div class="navbar-inner">
+		    <a class="brand" href="#">MoodToolkit</a>
+		</div>
+	</div>
+	<div class="container">
+		 <h2>You picked: {{activity}}</h2>
+		 <h3>Did you enjoy this activity?</h3>
+		<form action="/activity/rate/" method="post">
+			{% csrf_token %}
+			<fieldset>
+			{{rform}}
+			<input type='hidden' name='pk' value='{{pk}}'/>
+			<br/>
+		    <input type="submit" class="btn btn-large btn-primary" value="Rate Activity"/>
+			</fieldset>
+		</form>
+		</div>
+		</div>
+	</div>
+    <script src="http://code.jquery.com/jquery.js"></script>
+    <script src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
+    </body>
+    </html>
