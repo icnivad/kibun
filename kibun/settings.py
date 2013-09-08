@@ -1,5 +1,6 @@
 # Django settings for kibun project.
 from local_settings import *
+
 import os, sys
 
 myFilePath=os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
@@ -12,7 +13,6 @@ ADMINS = (
 )
 
 MANAGERS = ADMINS
-
 
 
 # Hosts/domain names that are valid for this site; required if DEBUG is False
@@ -42,6 +42,15 @@ USE_L10N = True
 # If you set this to False, Django will not use timezone-aware datetimes.
 USE_TZ = True
 
+# Absolute filesystem path to the directory that will hold user-uploaded files.
+# Example: "/var/www/example.com/media/"
+MEDIA_ROOT = 'Media'
+
+# URL that handles the media served from MEDIA_ROOT. Make sure to use a
+# trailing slash.
+# Examples: "http://example.com/media/", "http://media.example.com/"
+MEDIA_URL = 'media/'
+
 # Absolute path to the directory static files should be collected to.
 # Don't put anything in this directory yourself; store your static files
 # in apps' "static/" subdirectories and in STATICFILES_DIRS.
@@ -52,7 +61,12 @@ USE_TZ = True
 # Example: "http://example.com/static/", "http://static.example.com/"
 #STATIC_URL = '/static/'
 
-
+# Additional locations of static files
+STATICFILES_DIRS = ("/home/ben/Desktop/MoodToolkit/kibun/static",
+    # Put strings here, like "/home/html/static" or "C:/www/django/static".
+    # Always use forward slashes, even on Windows.
+    # Don't forget to use absolute paths, not relative paths.
+)
 
 # List of finder classes that know how to find static files in
 # various locations.
@@ -61,6 +75,9 @@ STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
 #    'django.contrib.staticfiles.finders.DefaultStorageFinder',
 )
+
+# Make this unique, and don't share it with anybody.
+#SECRET_KEY = 'h-my13t3&-r*c2febqxns6-gxu_!nj3t&_*roov(8+%fi41#8k'
 
 # List of callables that know how to import templates from various sources.
 TEMPLATE_LOADERS = (
@@ -78,8 +95,6 @@ MIDDLEWARE_CLASSES = (
     # Uncomment the next line for simple clickjacking protection:
     # 'django.middleware.clickjacking.XFrameOptionsMiddleware',
 )
-
-
 
 ROOT_URLCONF = 'kibun.urls'
 
