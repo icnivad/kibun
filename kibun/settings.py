@@ -1,4 +1,5 @@
 # Django settings for kibun project.
+from local_settings import *
 
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
@@ -83,7 +84,7 @@ STATICFILES_FINDERS = (
 )
 
 # Make this unique, and don't share it with anybody.
-SECRET_KEY = 'h-my13t3&-r*c2febqxns6-gxu_!nj3t&_*roov(8+%fi41#8k'
+#SECRET_KEY = 'h-my13t3&-r*c2febqxns6-gxu_!nj3t&_*roov(8+%fi41#8k'
 
 # List of callables that know how to import templates from various sources.
 TEMPLATE_LOADERS = (
