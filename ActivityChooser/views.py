@@ -6,7 +6,7 @@ import datetime
 
 # Create your views here.
 def index(request):
-	return render(request, 'activity/index.html', {})
+	return redirect('activity/choose')
 
 #my method of dealing with model ids is going to be hacky.  This should probably end up in a session when I make it possible to have
 #users/passwords/etc...
@@ -34,4 +34,7 @@ def rateActivity(request):
 	else:
 		pass	
 
+def history(request):
+	ratings=ActivityRating.objects.all()
+	return render(request, 'activity/history.html', {'ratings':ratings})
 

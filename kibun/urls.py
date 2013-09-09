@@ -1,5 +1,5 @@
 from django.conf.urls import patterns, include, url
-
+import views
 import ActivityChooser
 
 # Uncomment the next two lines to enable the admin:
@@ -8,6 +8,7 @@ admin.autodiscover()
 
 urlpatterns = patterns('',
     # Examples:
+    url(r'^$', views.index, name='homepage'),
     url(r'^activity/', include('ActivityChooser.urls', namespace='activity')),
     # url(r'^kibun/', include('kibun.foo.urls')),
 
