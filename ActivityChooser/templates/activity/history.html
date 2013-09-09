@@ -2,7 +2,61 @@
 {% block title %} Choose Activity {% endblock %}
 {% block content %} 
 		 <h1>History</h1>
+		<table class="table table-striped table-bordered table-condensed">
+		<tr>
+		<td>
+			Date
+		</td>
+		<td>
+			Feeling Before
+		</td>
+		<td>
+			Activity
+		</td>
+		<td>
+			Mood Before
+		</td>
+
+		<td>
+			Mood After
+		</td>
+		<td>
+			Feel better?
+		</td>
+		<td>
+			Glad you did it?
+		</td>
+		<td>
+			Note
+		</td>
+		</tr>
 		{% for r in ratings %}
-		<div>{{r}}</div>
+		<tr>
+		<td>
+			{{r.preDateTime}}
+		</td>
+		<td>
+			{{r.feeling}}
+		</td>
+		<td>
+			{{r.activity}}
+		</td>
+		<td>
+			{{r.preMood}}
+		</td>
+		<td>
+			{{r.postMood}}
+		</td>
+		<td>
+			{{r.feltBetter}}
+		</td>
+		<td>
+			{{r.goodChoice}}
+		</td>
+		<td>
+			{{r.comment}}
+		</td>
+		</tr>
 		{% endfor %}
+		</table>
 {% endblock %}
