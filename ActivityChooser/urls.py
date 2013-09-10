@@ -7,5 +7,5 @@ urlpatterns = patterns('',
     url(r'choose/', views.chooseActivity, name='choose'),
     url(r'rate/', views.rateActivity, name='rate'),
     url(r'history/', views.history, name='history'),
-
+    url(r'data/', views.data, name='data'),
 )

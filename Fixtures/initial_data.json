@@ -1,0 +1,594 @@
+[
+{
+  "pk": 1, 
+  "model": "ActivityChooser.activity", 
+  "fields": {
+    "name": "Read a book"
+  }
+},
+{
+  "pk": 2, 
+  "model": "ActivityChooser.activity", 
+  "fields": {
+    "name": "Work on MoodToolkit"
+  }
+},
+{
+  "pk": 3, 
+  "model": "ActivityChooser.activity", 
+  "fields": {
+    "name": "Study"
+  }
+},
+{
+  "pk": 4, 
+  "model": "ActivityChooser.activity", 
+  "fields": {
+    "name": "Go for a walk"
+  }
+},
+{
+  "pk": 5, 
+  "model": "ActivityChooser.activity", 
+  "fields": {
+    "name": "Go to class"
+  }
+},
+{
+  "pk": 6, 
+  "model": "ActivityChooser.activity", 
+  "fields": {
+    "name": "Talk to a friend"
+  }
+},
+{
+  "pk": 7, 
+  "model": "ActivityChooser.activity", 
+  "fields": {
+    "name": "Meditate"
+  }
+},
+{
+  "pk": 8, 
+  "model": "ActivityChooser.activity", 
+  "fields": {
+    "name": "Study for step"
+  }
+},
+{
+  "pk": 9, 
+  "model": "ActivityChooser.activity", 
+  "fields": {
+    "name": "take a nap"
+  }
+},
+{
+  "pk": 10, 
+  "model": "ActivityChooser.activity", 
+  "fields": {
+    "name": "wash dishes"
+  }
+},
+{
+  "pk": 11, 
+  "model": "ActivityChooser.activity", 
+  "fields": {
+    "name": "take a shower"
+  }
+},
+{
+  "pk": 12, 
+  "model": "ActivityChooser.activity", 
+  "fields": {
+    "name": "use the internet"
+  }
+},
+{
+  "pk": 13, 
+  "model": "ActivityChooser.activity", 
+  "fields": {
+    "name": "other"
+  }
+},
+{
+  "pk": 14, 
+  "model": "ActivityChooser.activity", 
+  "fields": {
+    "name": "Eat lunch with someone"
+  }
+},
+{
+  "pk": 15, 
+  "model": "ActivityChooser.activity", 
+  "fields": {
+    "name": "Invite a friend to do something"
+  }
+},
+{
+  "pk": 16, 
+  "model": "ActivityChooser.activity", 
+  "fields": {
+    "name": "Do laundry"
+  }
+},
+{
+  "pk": 3, 
+  "model": "ActivityChooser.activityrating", 
+  "fields": {
+    "comment": "still stressed abt work", 
+    "postDateTime": "2013-09-08T17:54:20Z", 
+    "goodChoice": "Yes", 
+    "preDateTime": "2013-09-08T17:33:52Z", 
+    "feltBetter": "Yes", 
+    "preMood": "4.0", 
+    "activity": 11, 
+    "feeling": "7", 
+    "postMood": "5.0"
+  }
+},
+{
+  "pk": 4, 
+  "model": "ActivityChooser.activityrating", 
+  "fields": {
+    "comment": "still feel sad", 
+    "postDateTime": "2013-09-08T19:16:59Z", 
+    "goodChoice": "Yes", 
+    "preDateTime": "2013-09-08T18:17:15Z", 
+    "feltBetter": "Not sure", 
+    "preMood": "4.0", 
+    "activity": 3, 
+    "feeling": "1", 
+    "postMood": "5.0"
+  }
+},
+{
+  "pk": 5, 
+  "model": "ActivityChooser.activityrating", 
+  "fields": {
+    "comment": "maybe more like 2.5 - feel quite sad, but read an illuminating article.  I don't feel like it was a waste.  Just don't know how to use the information.  Feel sad.  ", 
+    "postDateTime": "2013-09-08T19:40:14Z", 
+    "goodChoice": "Not sure", 
+    "preDateTime": "2013-09-08T19:35:17Z", 
+    "feltBetter": "Not sure", 
+    "preMood": "3.0", 
+    "activity": 12, 
+    "feeling": "2", 
+    "postMood": "2.0"
+  }
+},
+{
+  "pk": 6, 
+  "model": "ActivityChooser.activityrating", 
+  "fields": {
+    "comment": "climbing\r\npulled muscle", 
+    "postDateTime": "2013-09-08T20:55:26Z", 
+    "goodChoice": "Yes", 
+    "preDateTime": "2013-09-08T19:42:23Z", 
+    "feltBetter": "Yes", 
+    "preMood": "3.0", 
+    "activity": 6, 
+    "feeling": "2", 
+    "postMood": "5.0"
+  }
+},
+{
+  "pk": 7, 
+  "model": "ActivityChooser.activityrating", 
+  "fields": {
+    "comment": "still feel a bit sad.  not much has changed.", 
+    "postDateTime": "2013-09-08T21:36:07Z", 
+    "goodChoice": "Not sure", 
+    "preDateTime": "2013-09-08T21:23:54Z", 
+    "feltBetter": "Yes", 
+    "preMood": "3.0", 
+    "activity": 4, 
+    "feeling": "2", 
+    "postMood": "5.0"
+  }
+},
+{
+  "pk": 8, 
+  "model": "ActivityChooser.activityrating", 
+  "fields": {
+    "comment": "I want to date, still feel a bit lonely, but I definitely feel like I got a lot done!", 
+    "postDateTime": "2013-09-08T22:44:04Z", 
+    "goodChoice": "Yes", 
+    "preDateTime": "2013-09-08T21:39:59Z", 
+    "feltBetter": "Yes", 
+    "preMood": "4.0", 
+    "activity": 3, 
+    "feeling": "7", 
+    "postMood": "7.0"
+  }
+},
+{
+  "pk": 9, 
+  "model": "ActivityChooser.activityrating", 
+  "fields": {
+    "comment": "She wasn't there, but this was something I needed to do too.  ", 
+    "postDateTime": "2013-09-08T22:46:19Z", 
+    "goodChoice": "Yes", 
+    "preDateTime": "2013-09-08T22:44:38Z", 
+    "feltBetter": "Not sure", 
+    "preMood": "6.0", 
+    "activity": 6, 
+    "feeling": "1", 
+    "postMood": "5.0"
+  }
+},
+{
+  "pk": 10, 
+  "model": "ActivityChooser.activityrating", 
+  "fields": {
+    "comment": "Had to be done.  But I still feel sad about life, and I didn't do all that well on the test, which means I'd have to work a lot harder this week to honor.  And it's probably not worth it for me.  Which makes me sad.", 
+    "postDateTime": "2013-09-08T23:29:26Z", 
+    "goodChoice": "Yes", 
+    "preDateTime": "2013-09-08T22:46:36Z", 
+    "feltBetter": "No", 
+    "preMood": "6.0", 
+    "activity": 3, 
+    "feeling": "1", 
+    "postMood": "4.0"
+  }
+},
+{
+  "pk": 11, 
+  "model": "ActivityChooser.activityrating", 
+  "fields": {
+    "comment": "just feel kind of sad", 
+    "postDateTime": "2013-09-08T23:49:50Z", 
+    "goodChoice": "No", 
+    "preDateTime": "2013-09-08T23:32:15Z", 
+    "feltBetter": "No", 
+    "preMood": "4.0", 
+    "activity": 12, 
+    "feeling": "2", 
+    "postMood": "3.0"
+  }
+},
+{
+  "pk": 12, 
+  "model": "ActivityChooser.activityrating", 
+  "fields": {
+    "comment": "just checked all my emails.  No messages. don't feel any better.", 
+    "postDateTime": "2013-09-08T23:51:51Z", 
+    "goodChoice": "No", 
+    "preDateTime": "2013-09-08T23:50:30Z", 
+    "feltBetter": "No", 
+    "preMood": "4.0", 
+    "activity": 12, 
+    "feeling": "2", 
+    "postMood": "4.0"
+  }
+},
+{
+  "pk": 13, 
+  "model": "ActivityChooser.activityrating", 
+  "fields": {
+    "comment": "it was fun", 
+    "postDateTime": "2013-09-09T00:54:31Z", 
+    "goodChoice": "Yes", 
+    "preDateTime": "2013-09-09T00:27:55Z", 
+    "feltBetter": "Yes", 
+    "preMood": "4.0", 
+    "activity": 1, 
+    "feeling": "7", 
+    "postMood": "6.0"
+  }
+},
+{
+  "pk": 14, 
+  "model": "ActivityChooser.activityrating", 
+  "fields": {
+    "comment": "Leann is great!", 
+    "postDateTime": "2013-09-09T03:03:58Z", 
+    "goodChoice": "Yes", 
+    "preDateTime": "2013-09-09T02:30:08Z", 
+    "feltBetter": "Yes", 
+    "preMood": "4.0", 
+    "activity": 6, 
+    "feeling": "2", 
+    "postMood": "7.0"
+  }
+},
+{
+  "pk": 16, 
+  "model": "ActivityChooser.activityrating", 
+  "fields": {
+    "comment": "", 
+    "postDateTime": null, 
+    "goodChoice": "", 
+    "preDateTime": "2013-09-09T03:48:47Z", 
+    "feltBetter": "", 
+    "preMood": "5.0", 
+    "activity": 12, 
+    "feeling": "7", 
+    "postMood": null
+  }
+},
+{
+  "pk": 17, 
+  "model": "ActivityChooser.activityrating", 
+  "fields": {
+    "comment": "", 
+    "postDateTime": null, 
+    "goodChoice": "", 
+    "preDateTime": "2013-09-09T04:01:25Z", 
+    "feltBetter": "", 
+    "preMood": "4.0", 
+    "activity": 1, 
+    "feeling": "2", 
+    "postMood": null
+  }
+},
+{
+  "pk": 18, 
+  "model": "ActivityChooser.activityrating", 
+  "fields": {
+    "comment": "", 
+    "postDateTime": "2013-09-09T05:37:26Z", 
+    "goodChoice": "Yes", 
+    "preDateTime": "2013-09-09T05:26:31Z", 
+    "feltBetter": "Yes", 
+    "preMood": "5.0", 
+    "activity": 7, 
+    "feeling": "1", 
+    "postMood": "7.0"
+  }
+},
+{
+  "pk": 19, 
+  "model": "ActivityChooser.activityrating", 
+  "fields": {
+    "comment": "", 
+    "postDateTime": "2013-09-09T14:13:44Z", 
+    "goodChoice": "Yes", 
+    "preDateTime": "2013-09-09T13:54:58Z", 
+    "feltBetter": "Yes", 
+    "preMood": "4.0", 
+    "activity": 11, 
+    "feeling": "2", 
+    "postMood": "5.0"
+  }
+},
+{
+  "pk": 20, 
+  "model": "ActivityChooser.activityrating", 
+  "fields": {
+    "comment": "decided to come back and work on moodtoolkit", 
+    "postDateTime": "2013-09-09T15:22:06Z", 
+    "goodChoice": "No", 
+    "preDateTime": "2013-09-09T14:37:06Z", 
+    "feltBetter": "Not sure", 
+    "preMood": "4.0", 
+    "activity": 5, 
+    "feeling": "7", 
+    "postMood": "6.0"
+  }
+},
+{
+  "pk": 21, 
+  "model": "ActivityChooser.activityrating", 
+  "fields": {
+    "comment": "", 
+    "postDateTime": null, 
+    "goodChoice": "", 
+    "preDateTime": "2013-09-09T15:34:14Z", 
+    "feltBetter": "", 
+    "preMood": "6.0", 
+    "activity": 2, 
+    "feeling": "1", 
+    "postMood": null
+  }
+},
+{
+  "pk": 22, 
+  "model": "ActivityChooser.activityrating", 
+  "fields": {
+    "comment": "I didn't actually do this, but I'm pretty sure I would have felt  better if I had.", 
+    "postDateTime": "2013-09-09T15:36:34Z", 
+    "goodChoice": "Yes", 
+    "preDateTime": "2013-09-09T15:36:09Z", 
+    "feltBetter": "Yes", 
+    "preMood": "5.0", 
+    "activity": 7, 
+    "feeling": "8", 
+    "postMood": "7.0"
+  }
+},
+{
+  "pk": 23, 
+  "model": "ActivityChooser.activityrating", 
+  "fields": {
+    "comment": "", 
+    "postDateTime": "2013-09-09T16:06:48Z", 
+    "goodChoice": "Not sure", 
+    "preDateTime": "2013-09-09T15:47:37Z", 
+    "feltBetter": "No", 
+    "preMood": "5.0", 
+    "activity": 4, 
+    "feeling": "8", 
+    "postMood": "5.0"
+  }
+},
+{
+  "pk": 24, 
+  "model": "ActivityChooser.activityrating", 
+  "fields": {
+    "comment": "feeling sad but calm.\r\nworked on cbt/read about loneliness online.  contemplative.", 
+    "postDateTime": "2013-09-09T18:56:28Z", 
+    "goodChoice": "Yes", 
+    "preDateTime": "2013-09-09T18:24:20Z", 
+    "feltBetter": "No", 
+    "preMood": "4.0", 
+    "activity": 13, 
+    "feeling": "2", 
+    "postMood": "4.0"
+  }
+},
+{
+  "pk": 25, 
+  "model": "ActivityChooser.activityrating", 
+  "fields": {
+    "comment": "looked for milk tea", 
+    "postDateTime": "2013-09-09T19:40:50Z", 
+    "goodChoice": "Yes", 
+    "preDateTime": "2013-09-09T19:25:22Z", 
+    "feltBetter": "Yes", 
+    "preMood": "4.0", 
+    "activity": 13, 
+    "feeling": "8", 
+    "postMood": "5.0"
+  }
+},
+{
+  "pk": 26, 
+  "model": "ActivityChooser.activityrating", 
+  "fields": {
+    "comment": "", 
+    "postDateTime": "2013-09-09T20:25:23Z", 
+    "goodChoice": "Yes", 
+    "preDateTime": "2013-09-09T20:25:00Z", 
+    "feltBetter": "Yes", 
+    "preMood": "2.0", 
+    "activity": 4, 
+    "feeling": "6", 
+    "postMood": "5.0"
+  }
+},
+{
+  "pk": 27, 
+  "model": "ActivityChooser.activityrating", 
+  "fields": {
+    "comment": "OKC message.  I feel relief, but it may be stressful if she doesn't respond.  But the only way to get anywhere is to send out lots of messages, so I'm glad I did this.  ", 
+    "postDateTime": "2013-09-09T22:32:43Z", 
+    "goodChoice": "Yes", 
+    "preDateTime": "2013-09-09T22:24:12Z", 
+    "feltBetter": "Yes", 
+    "preMood": "4.0", 
+    "activity": 13, 
+    "feeling": "6", 
+    "postMood": "6.0"
+  }
+},
+{
+  "pk": 28, 
+  "model": "ActivityChooser.activityrating", 
+  "fields": {
+    "comment": "It's useful - I need to get these done.  It may help me learn drugs a little, but it's boring, and it's not solving the problem that's actually upsetting me.  ", 
+    "postDateTime": "2013-09-09T23:09:36Z", 
+    "goodChoice": "Not sure", 
+    "preDateTime": "2013-09-09T22:35:02Z", 
+    "feltBetter": "No", 
+    "preMood": "5.0", 
+    "activity": 8, 
+    "feeling": "1", 
+    "postMood": "5.0"
+  }
+},
+{
+  "pk": 29, 
+  "model": "ActivityChooser.activityrating", 
+  "fields": {
+    "comment": "I didn't get through to my friends, but this was working towards something that matters to me.  ", 
+    "postDateTime": "2013-09-09T23:19:01Z", 
+    "goodChoice": "Yes", 
+    "preDateTime": "2013-09-09T23:16:48Z", 
+    "feltBetter": "Yes", 
+    "preMood": "4.0", 
+    "activity": 6, 
+    "feeling": "2", 
+    "postMood": "5.0"
+  }
+},
+{
+  "pk": 30, 
+  "model": "ActivityChooser.activityrating", 
+  "fields": {
+    "comment": "went home.\r\nit's nice to be home.\r\nalso talked to Dan - not sure if that helped or not.  Don't really feel great.", 
+    "postDateTime": "2013-09-09T23:53:14Z", 
+    "goodChoice": "Yes", 
+    "preDateTime": "2013-09-09T23:21:47Z", 
+    "feltBetter": "No", 
+    "preMood": "4.0", 
+    "activity": 13, 
+    "feeling": "2", 
+    "postMood": "5.0"
+  }
+},
+{
+  "pk": 31, 
+  "model": "ActivityChooser.activityrating", 
+  "fields": {
+    "comment": "feel great after sending out an invitation, but may feel worse if i'm rejected.", 
+    "postDateTime": "2013-09-09T23:55:38Z", 
+    "goodChoice": "Yes", 
+    "preDateTime": "2013-09-09T23:53:59Z", 
+    "feltBetter": "Yes", 
+    "preMood": "4.0", 
+    "activity": 15, 
+    "feeling": "8", 
+    "postMood": "6.0"
+  }
+},
+{
+  "pk": 32, 
+  "model": "ActivityChooser.activityrating", 
+  "fields": {
+    "comment": "", 
+    "postDateTime": "2013-09-10T01:16:04Z", 
+    "goodChoice": "No", 
+    "preDateTime": "2013-09-09T23:57:31Z", 
+    "feltBetter": "No", 
+    "preMood": "5.0", 
+    "activity": 12, 
+    "feeling": "1", 
+    "postMood": "5.0"
+  }
+},
+{
+  "pk": 33, 
+  "model": "ActivityChooser.activityrating", 
+  "fields": {
+    "comment": "I know meditation won't always feel this good, but I just feel so much more peaceful right now.", 
+    "postDateTime": "2013-09-10T01:09:18Z", 
+    "goodChoice": "Yes", 
+    "preDateTime": "2013-09-10T00:56:49Z", 
+    "feltBetter": "Yes", 
+    "preMood": "3.0", 
+    "activity": 7, 
+    "feeling": "2", 
+    "postMood": "7.0"
+  }
+},
+{
+  "pk": 34, 
+  "model": "ActivityChooser.activityrating", 
+  "fields": {
+    "comment": "", 
+    "postDateTime": "2013-09-10T02:09:21Z", 
+    "goodChoice": "Yes", 
+    "preDateTime": "2013-09-10T01:42:17Z", 
+    "feltBetter": "Yes", 
+    "preMood": "6.0", 
+    "activity": 2, 
+    "feeling": "1", 
+    "postMood": "5.0"
+  }
+},
+{
+  "pk": 35, 
+  "model": "ActivityChooser.activityrating", 
+  "fields": {
+    "comment": "", 
+    "postDateTime": null, 
+    "goodChoice": "", 
+    "preDateTime": "2013-09-10T02:23:04Z", 
+    "feltBetter": "", 
+    "preMood": "6.0", 
+    "activity": 16, 
+    "feeling": "7", 
+    "postMood": null
+  }
+}
+]

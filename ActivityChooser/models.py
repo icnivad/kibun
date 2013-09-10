@@ -1,4 +1,6 @@
 from django.db import models
+from django.db.models import Avg
+import math 
 
 # Create your models here.
 
@@ -39,6 +41,27 @@ class Activity(models.Model):
 
 	def __str__(self):
 		return self.name
+	
+	def avgMoodChange(self):
+		ratings=ActivityRating.objects.filter(activity=self.id)
+		count=len(ratings)
+		if (count==0):
+			return ""
+		else:
+			avg=0
+			for r in ratings:
+				if((r.postMood==None) or (r.preMood==None)):
+					pass
+				else:
+					avg+=r.postMood - r.preMood
+			avg=avg/len(ratings)
+			return math.ceil(avg*100)/100
+		
+	def avgFeltBetter(self):
+		pass
+	
+	def avgGoodChoice(self):
+		pass
 	
 class ActivityRating(models.Model):
 	feeling=models.CharField(max_length=200)

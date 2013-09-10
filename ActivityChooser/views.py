@@ -1,7 +1,7 @@
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from forms import ActivityChooseForm, ActivityRatingForm
-from models import ActivityRating
+from models import ActivityRating, Activity
 import datetime
 
 # Create your views here.
@@ -36,5 +36,9 @@ def rateActivity(request):
 
 def history(request):
 	ratings=ActivityRating.objects.all()
+	print len(ratings)
 	return render(request, 'activity/history.html', {'ratings':ratings})
 
+def data(request):
+	activities=Activity.objects.all()
+	return render(request, 'activity/data.html', {'activities':activities})
