@@ -4,6 +4,13 @@ from fabric.contrib.console import confirm
 env.hosts = ['kanjidoc@kanjidoc.webfactional.com']
 prompt("Enter key: ", "password") 
 
+
+#### local commands
+def prep_deploy():
+	local('git push origin master')
+
+
+####### Server Commands
 def push():
 	run('cd /home/kanjidoc/webapps/kibun/; git pull origin master')
 
@@ -22,6 +29,7 @@ def check_memory():
 	run("ps -u kanjidoc -o rss,command")
 
 def deploy():
+	prep_deploy()
 	push()
 	static_media()
 	restart()
