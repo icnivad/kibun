@@ -1,8 +1,20 @@
 {% extends 'activity/base.html' %}
 {% block title %} Activity Data {% endblock %}
 {% block content %} 
-	{% for activity in activities %}
-		{{activity.name}}: {{activity.avgMoodChange}}
-		<br/>
+	<table  class="table table-striped table-bordered table-condensed">
+	<tr>
+		<td>Activity</td>
+		<td>Average change in mood</td>
+		<td>Was this a good choice?</td>
+		<td>Were you glad you did it?</td>
+	</tr>
+	{% for activity in actList %}
+	<tr>
+		<td>{{activity.activity}}</td>
+		<td>{{activity.moodChange}}</td>
+		<td>{{activity.goodChoice}}</td>
+		<td>{{activity.feltBetter}}</td>
+	</tr>
 	{% endfor %}
+	</table>
 {% endblock %}

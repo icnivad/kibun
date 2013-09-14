@@ -58,11 +58,21 @@ class Activity(models.Model):
 			return math.ceil(avg*100)/100
 		
 	def avgFeltBetter(self):
-		pass
+		pcount=ActivityRating.objects.filter(activity=self.id).filter(feltBetter="Yes").count()
+		ncount=ActivityRating.objects.filter(activity=self.id).filter(feltBetter="No").count()
+		if (pcount+ncount)==0:
+			return "More Data Needed"
+		else:
+			return (pcount-ncount)/(pcount+ncount)
 	
 	def avgGoodChoice(self):
-		pass
-	
+		pcount=ActivityRating.objects.filter(activity=self.id).filter(goodChoice="Yes").count()
+		ncount=ActivityRating.objects.filter(activity=self.id).filter(goodChoice="No").count()
+		if (pcount+ncount)==0:
+			return "More Data Needed"
+		else:
+			return (pcount-ncount)/(pcount+ncount)	
+
 class ActivityRating(models.Model):
 	feeling=models.CharField(max_length=200)
 	preMood=models.DecimalField(max_digits=3, decimal_places=1)

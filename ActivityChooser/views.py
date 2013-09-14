@@ -3,10 +3,11 @@ from django.shortcuts import render, redirect
 from forms import ActivityChooseForm, ActivityRatingForm
 from models import ActivityRating, Activity
 import datetime
+from operator import itemgetter
 
 # Create your views here.
 def index(request):
-	return redirect('activity/choose')
+	return redirect('/activity/choose')
 
 #my method of dealing with model ids is going to be hacky.  This should probably end up in a session when I make it possible to have
 #users/passwords/etc...
@@ -36,9 +37,17 @@ def rateActivity(request):
 
 def history(request):
 	ratings=ActivityRating.objects.all()
-	print len(ratings)
-	return render(request, 'activity/history.html', {'ratings':ratings})
+	return render(request, 'activity/history.html', {'ratings':reversed(ratings)})
 
 def data(request):
 	activities=Activity.objects.all()
-	return render(request, 'activity/data.html', {'activities':activities})
+	actList=[]
+	for activity in activities:
+		actList.append({
+			'activity':activity.name,
+			'moodChange':activity.avgMoodChange(),
+			'feltBetter':activity.avgFeltBetter(),
+			'goodChoice':activity.avgGoodChoice()
+		})
+	actList=sorted(actList, key=itemgetter('moodChange'), reverse=True)
+	return render(request, 'activity/data.html', {'actList':actList})
