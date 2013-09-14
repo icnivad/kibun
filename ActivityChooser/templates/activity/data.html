@@ -7,6 +7,7 @@
 		<td>Average change in mood</td>
 		<td>Was this a good choice?</td>
 		<td>Were you glad you did it?</td>
+		<td>Number of times you did this activity</td>
 	</tr>
 	{% for activity in actList %}
 	<tr>
@@ -14,6 +15,7 @@
 		<td>{{activity.moodChange}}</td>
 		<td>{{activity.goodChoice}}</td>
 		<td>{{activity.feltBetter}}</td>
+		<td>{{activity.count}}</td>
 	</tr>
 	{% endfor %}
 	</table>
