@@ -47,7 +47,8 @@ def data(request):
 			'activity':activity.name,
 			'moodChange':activity.avgMoodChange(),
 			'feltBetter':activity.avgFeltBetter(),
-			'goodChoice':activity.avgGoodChoice()
+			'goodChoice':activity.avgGoodChoice(),
+			'count':activity.actCount(),
 		})
 	actList=sorted(actList, key=itemgetter('moodChange'), reverse=True)
 	return render(request, 'activity/data.html', {'actList':actList})

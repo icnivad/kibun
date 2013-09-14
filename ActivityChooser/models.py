@@ -42,6 +42,10 @@ class Activity(models.Model):
 	def __str__(self):
 		return self.name
 	
+	def actCount(self):
+		ratings=ActivityRating.objects.filter(activity=self.id)
+		return len(ratings)
+	
 	def avgMoodChange(self):
 		ratings=ActivityRating.objects.filter(activity=self.id)
 		count=len(ratings)
@@ -60,6 +64,9 @@ class Activity(models.Model):
 	def avgFeltBetter(self):
 		pcount=ActivityRating.objects.filter(activity=self.id).filter(feltBetter="Yes").count()
 		ncount=ActivityRating.objects.filter(activity=self.id).filter(feltBetter="No").count()
+		#don't want to get zero when we divide -> so convert to floats
+		pcount=float(pcount)
+		ncount=float(ncount)
 		if (pcount+ncount)==0:
 			return "More Data Needed"
 		else:
@@ -68,6 +75,10 @@ class Activity(models.Model):
 	def avgGoodChoice(self):
 		pcount=ActivityRating.objects.filter(activity=self.id).filter(goodChoice="Yes").count()
 		ncount=ActivityRating.objects.filter(activity=self.id).filter(goodChoice="No").count()
+		#don't want to get zero when we divide -> so convert to floats
+		pcount=float(pcount)
+		ncount=float(ncount)
+
 		if (pcount+ncount)==0:
 			return "More Data Needed"
 		else:
