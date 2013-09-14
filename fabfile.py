@@ -12,10 +12,10 @@ def prep_deploy():
 
 ####### Server Commands
 def push():
-	run('cd /home/kanjidoc/webapps/kibun/; git pull origin master')
+	run('cd /home/kanjidoc/webapps/kibun/kibun/; git pull origin master')
 
 def static_media():
-	run('cd /home/kanjidoc/webapps/kibun/; python2.7 manage.py collectstatic')
+	run('cd /home/kanjidoc/webapps/kibun/kibun/; python2.7 manage.py collectstatic')
 
 def restart():
 	run('/home/kanjidoc/webapps/kibun/apache2/bin/restart')
