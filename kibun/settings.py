@@ -121,6 +121,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     'django.core.context_processors.static',
     'django.contrib.auth.context_processors.auth',
     'django.core.context_processors.request',
+    'django_session_stashable.stashed_object_counts',
 )
 
 INSTALLED_APPS = (
@@ -136,6 +137,8 @@ INSTALLED_APPS = (
      'django.contrib.admindocs',
      'ActivityChooser',
      'registration',
+     'south',
+     'lazysignup',
 )
 
 # A sample logging configuration. The only tangible logging

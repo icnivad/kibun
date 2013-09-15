@@ -1,6 +1,7 @@
 {% extends 'activity/base.html' %}
 {% block title %} Choose Activity {% endblock %}
 {% block content %} 
+		{% include 'registration/login_invitation.html' %}
 		<h1>How do you feel?</h1>
 		<form action="/activity/choose/" method="post">
 			{% csrf_token %}

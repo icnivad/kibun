@@ -4,6 +4,8 @@ from forms import ActivityChooseForm, ActivityRatingForm
 from models import ActivityRating, Activity
 import datetime
 from operator import itemgetter
+from django_session_stashable import SessionStashable
+
 
 # Create your views here.
 def index(request):
@@ -17,7 +19,7 @@ def chooseActivity(request):
 		aform=ActivityChooseForm(request.POST)
 		aRating=aform.save(commit=False)
 		aRating.preDateTime=datetime.datetime.now()
-		aRating.save()
+		aRating.save(request)
 		rform=ActivityRatingForm(instance=aRating)
 		pk=aRating.id
 		return render(request, 'activity/rate.html', {'rform':rform, 'activity':aRating.activity, 'pk':pk}) 
@@ -26,29 +28,30 @@ def chooseActivity(request):
 
 def rateActivity(request):
 	if request.method=='POST':
-		aRating=ActivityRating.objects.get(pk=request.POST['pk'])
+		aRating=ActivityRating.objects.get_with_permission(request, pk=request.POST['pk'])
 		rform=ActivityRatingForm(request.POST, instance=aRating)
 		aRating=rform.save(commit=False)
 		aRating.postDateTime=datetime.datetime.now()
-		aRating.save()
+		aRating.save(request)
 		return redirect('/activity')
 	else:
 		pass	
 
 def history(request):
-	ratings=ActivityRating.objects.all()
+	ratings=ActivityRating.objects.all_with_permission(request)
 	return render(request, 'activity/history.html', {'ratings':reversed(ratings)})
 
 def data(request):
-	activities=Activity.objects.all()
+	print 'here'
+	activities=Activity.objects.all_with_permission(request)
 	actList=[]
 	for activity in activities:
 		actList.append({
 			'activity':activity.name,
-			'moodChange':activity.avgMoodChange(),
-			'feltBetter':activity.avgFeltBetter(),
-			'goodChoice':activity.avgGoodChoice(),
-			'count':activity.actCount(),
+			'moodChange':activity.avgMoodChange(request),
+			'feltBetter':activity.avgFeltBetter(request),
+			'goodChoice':activity.avgGoodChoice(request),
+			'count':activity.actCount(request),
 		})
 	actList=sorted(actList, key=itemgetter('moodChange'), reverse=True)
 	return render(request, 'activity/data.html', {'actList':actList})

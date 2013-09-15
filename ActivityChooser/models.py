@@ -1,5 +1,8 @@
 from django.db import models
 from django.db.models import Avg
+from django.contrib.auth.models import User
+from django_session_stashable import SessionStashable
+
 import math 
 
 # Create your models here.
@@ -14,6 +17,8 @@ presetFeelings=(
 	('6', 'anxious'),
 	('7', 'ok'),
 	('8', 'other'),
+	('9', 'tired'),
+	('10', 'lonely'),
 	)
 
 presetMoods=(
@@ -36,18 +41,46 @@ boolChoices=(
 	("Not sure", "Not sure"),
 )
 
-class Activity(models.Model):
-	name=models.CharField(max_length=200)
 
+
+class UserData(models.Model):
+	user=models.ForeignKey(User, editable=False, blank=True, null=True)
+	creator_field='user'
+	class Meta:
+		abstract=True
+
+class ActivityManager(models.Manager):
+	def all_with_permission(self, request):
+		defActs=self.filter(user=None)
+		print len(defActs)
+		activities=[]
+		if request.user.is_active:
+			activities=self.filter(user=request.user)
+		else:
+			activities=Activity.get_stashed_in_session(request.session)
+		return (defActs | activities)
+	
+class Activity(UserData, SessionStashable):
+	context_count_name="activity_count"
+	name=models.CharField(max_length=200)
+	objects=ActivityManager()
 	def __str__(self):
 		return self.name
 	
-	def actCount(self):
-		ratings=ActivityRating.objects.filter(activity=self.id)
+	def save(self, request):
+		if request.user.is_active:
+			self.user=request.user
+			super(Activity, self).save()
+		else:
+			super(Activity, self).save()
+			self.stash_in_session(request.session)
+	
+	def actCount(self, request):
+		ratings=ActivityRating.objects.special_filter(request, self.id)
 		return len(ratings)
 	
-	def avgMoodChange(self):
-		ratings=ActivityRating.objects.filter(activity=self.id)
+	def avgMoodChange(self, request):
+		ratings=ActivityRating.objects.special_filter(request, self.id)
 		count=len(ratings)
 		if (count==0):
 			return ""
@@ -61,9 +94,9 @@ class Activity(models.Model):
 			avg=avg/len(ratings)
 			return math.ceil(avg*100)/100
 		
-	def avgFeltBetter(self):
-		pcount=ActivityRating.objects.filter(activity=self.id).filter(feltBetter="Yes").count()
-		ncount=ActivityRating.objects.filter(activity=self.id).filter(feltBetter="No").count()
+	def avgFeltBetter(self, request):
+		pcount=ActivityRating.objects.special_filter(request, self.id).filter(feltBetter="Yes").count()
+		ncount=ActivityRating.objects.special_filter(request, self.id).filter(feltBetter="No").count()
 		#don't want to get zero when we divide -> so convert to floats
 		pcount=float(pcount)
 		ncount=float(ncount)
@@ -72,9 +105,9 @@ class Activity(models.Model):
 		else:
 			return (pcount-ncount)/(pcount+ncount)
 	
-	def avgGoodChoice(self):
-		pcount=ActivityRating.objects.filter(activity=self.id).filter(goodChoice="Yes").count()
-		ncount=ActivityRating.objects.filter(activity=self.id).filter(goodChoice="No").count()
+	def avgGoodChoice(self, request):
+		pcount=ActivityRating.objects.special_filter(request, self.id).filter(goodChoice="Yes").count()
+		ncount=ActivityRating.objects.special_filter(request, self.id).filter(goodChoice="No").count()
 		#don't want to get zero when we divide -> so convert to floats
 		pcount=float(pcount)
 		ncount=float(ncount)
@@ -84,7 +117,30 @@ class Activity(models.Model):
 		else:
 			return (pcount-ncount)/(pcount+ncount)	
 
-class ActivityRating(models.Model):
+class ActivityRatingManager(models.Manager):
+	def get_with_permission(self, request, pk):
+		arating=self.get(pk=pk)
+		if ((arating.user==request.user) or (arating.stashed_in_session(request.session))):
+			return arating
+		return None
+		
+	def all_with_permission(self, request):
+		aratings=ActivityRating.get_stashed_in_session(request.session)
+		if request.user.is_active:
+			aratings=aratings | self.filter(user=request.user)
+		return aratings
+	
+	def special_filter(self, request, activity_id):
+		aratings=ActivityRating.get_stashed_in_session(request.session).filter(activity=activity_id)
+		if request.user.is_active:
+			aratings=aratings | self.filter(user=request.user).filter(activity=activity_id)
+		return aratings
+
+
+class ActivityRating(UserData, SessionStashable):
+	context_count_name="activity_rating_count"
+	objects=ActivityRatingManager()
+	
 	feeling=models.CharField(max_length=200)
 	preMood=models.DecimalField(max_digits=3, decimal_places=1)
 	preDateTime=models.DateTimeField()
@@ -104,7 +160,14 @@ class ActivityRating(models.Model):
 	def __str__(self):
 		toReturn=str(self.preDateTime) + " " + str(self.preMood) + " " + str(self.activity) + " " + str(self.postMood)
 		return toReturn
-		
+	
+	def save(self, request):
+		if request.user.is_active:
+			self.user=request.user
+			super(ActivityRating, self).save()
+		else:
+			super(ActivityRating, self).save()
+			self.stash_in_session(request.session)
 		
 		
 		
