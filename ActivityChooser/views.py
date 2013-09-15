@@ -24,6 +24,7 @@ def chooseActivity(request):
 		pk=aRating.id
 		return render(request, 'activity/rate.html', {'rform':rform, 'activity':aRating.activity, 'pk':pk}) 
 	aform=ActivityChooseForm()
+	aform.fields['activity'].queryset=Activity.objects.all_with_permission(request)
 	return render(request, 'activity/choose.html',{'aform':aform})
 
 def rateActivity(request):
