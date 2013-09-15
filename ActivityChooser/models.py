@@ -52,7 +52,6 @@ class UserData(models.Model):
 class ActivityManager(models.Manager):
 	def all_with_permission(self, request):
 		defActs=self.filter(user=None)
-		print len(defActs)
 		activities=[]
 		if request.user.is_active:
 			activities=self.filter(user=request.user)
@@ -64,6 +63,10 @@ class Activity(UserData, SessionStashable):
 	context_count_name="activity_count"
 	name=models.CharField(max_length=200)
 	objects=ActivityManager()
+	
+	#django-sessionstashable
+	session_variable='activity_stash'
+	
 	def __str__(self):
 		return self.name
 	
@@ -139,6 +142,10 @@ class ActivityRatingManager(models.Manager):
 
 class ActivityRating(UserData, SessionStashable):
 	context_count_name="activity_rating_count"
+	
+	#django-sessionstashable
+	session_variable='activity_rating_stash'
+	
 	objects=ActivityRatingManager()
 	
 	feeling=models.CharField(max_length=200)

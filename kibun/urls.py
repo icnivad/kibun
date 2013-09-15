@@ -2,7 +2,7 @@ from django.conf.urls import patterns, include, url
 import views, settings
 import ActivityChooser
 from django.contrib.auth.views import password_reset, password_reset_done, password_change, password_change_done
-from django.views.generic import TemplateView
+from django.views.generic import TemplateView, RedirectView
 
 
 # Uncomment the next two lines to enable the admin:
@@ -12,6 +12,7 @@ admin.autodiscover()
 urlpatterns = patterns('',
     # Examples:
     url(r'^$', views.index, name='homepage'),
+    url(r'users/', RedirectView.as_view(url='/activity/history')), #terrible, terrible way to do things, but it will work for the moment
     url(r'^activity/', include('ActivityChooser.urls', namespace='activity')),
     # url(r'^kibun/', include('kibun.foo.urls')),
 

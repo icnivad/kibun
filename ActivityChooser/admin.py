@@ -3,10 +3,6 @@ from ActivityChooser.models import Activity, ActivityRating
 from django import forms
 from django.contrib.auth.models import User
 
-
-admin.site.register(ActivityRating)
-
-
 class CustomActivityForm(forms.ModelForm):
 	user=forms.ModelChoiceField(queryset=User.objects.all(), empty_label="None", required=False)
 	class Meta:
@@ -18,4 +14,8 @@ class ActivityAdmin(admin.ModelAdmin):
 	def save_model(self, request, obj, form, change):
 		super(Activity, obj).save()
 
+class ActivityRatingAdmin(admin.ModelAdmin):
+	readonly_fields=('user',)
+
 admin.site.register(Activity, ActivityAdmin)
+admin.site.register(ActivityRating, ActivityRatingAdmin)

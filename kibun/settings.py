@@ -16,8 +16,9 @@ MANAGERS = ADMINS
 
 
 #Django-registration constants
-LOGIN_REDIRECT_URL="/"
-REGISTER_REDIRECT_URL="/"
+LOGIN_REDIRECT_URL="/activity/history"
+REGISTER_REDIRECT_URL="/activity/history"
+SUCCESS_URL="/activity/history"
 ACCOUNT_ACTIVATION_DAYS = 7
 
 # Hosts/domain names that are valid for this site; required if DEBUG is False

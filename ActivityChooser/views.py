@@ -42,7 +42,6 @@ def history(request):
 	return render(request, 'activity/history.html', {'ratings':reversed(ratings)})
 
 def data(request):
-	print 'here'
 	activities=Activity.objects.all_with_permission(request)
 	actList=[]
 	for activity in activities:
