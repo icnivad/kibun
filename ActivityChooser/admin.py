@@ -16,6 +16,9 @@ class ActivityAdmin(admin.ModelAdmin):
 
 class ActivityRatingAdmin(admin.ModelAdmin):
 	readonly_fields=('user',)
+	
+	def save_model(self, request, obj, form, change):
+		super(ActivityRating, obj).save()
 
 admin.site.register(Activity, ActivityAdmin)
 admin.site.register(ActivityRating, ActivityRatingAdmin)
