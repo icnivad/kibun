@@ -15,6 +15,12 @@ ADMINS = (
 MANAGERS = ADMINS
 
 
+#Django-registration constants
+LOGIN_REDIRECT_URL="/activity/history"
+REGISTER_REDIRECT_URL="/activity/history"
+SUCCESS_URL="/activity/history"
+ACCOUNT_ACTIVATION_DAYS = 7
+
 # Hosts/domain names that are valid for this site; required if DEBUG is False
 # See https://docs.djangoproject.com/en/1.5/ref/settings/#allowed-hosts
 ALLOWED_HOSTS = []
@@ -86,6 +92,11 @@ TEMPLATE_LOADERS = (
 #     'django.template.loaders.eggs.Loader',
 )
 
+AUTHENTICATION_BACKENDS = (
+  'django.contrib.auth.backends.ModelBackend',
+#  'lazysignup.backends.LazySignupBackend',
+)
+
 MIDDLEWARE_CLASSES = (
     'django.middleware.common.CommonMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -110,6 +121,8 @@ TEMPLATE_DIRS = (myFilePath+"/templates",
 TEMPLATE_CONTEXT_PROCESSORS = (
     'django.core.context_processors.static',
     'django.contrib.auth.context_processors.auth',
+    'django.core.context_processors.request',
+    'django_session_stashable.stashed_object_counts',
 )
 
 INSTALLED_APPS = (
@@ -124,6 +137,9 @@ INSTALLED_APPS = (
     # Uncomment the next line to enable admin documentation:
      'django.contrib.admindocs',
      'ActivityChooser',
+     'registration',
+     'south',
+     'lazysignup',
 )
 
 # A sample logging configuration. The only tangible logging
