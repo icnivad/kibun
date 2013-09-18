@@ -1,11 +1,22 @@
 {% extends 'navbase.html' %}
 {% block title %} MoodToolkit {% endblock %}
 {% block content %}
+	<div class='span6'>
 	<h1>Welcome to MoodToolkit</h1>
-		<p class='span6'>This website helps you decide what to do based on how you're feeling right now.
+		<p>This website helps you keep track of how different activities affect your mood.
 		<br/>
-		Hopefully it will help you improve your mood.
+		<h3>How to use this site:</h3>
+		<strong>Step 1:</strong> go to <a href="/activity/choose">Choose Activity</a><br/>
+		<strong>Step 2:</strong> Enter your current feeling and mood, and an activity you'd like to do.<br/>
+		<strong>Step 3:</strong> After completing the activity, enter your new mood.<br/>
+		<strong>Step 4:</strong>You can see a list of your activities at <a href="/activity/history">Activity History</a>
+		and you can see a summary of how different activities affect your mood at <a href="/activity/data">Activity Summary</a>.
 		<br/>
-		<a href="/activity/">Pick Something To Do</a>
+		You'll have to enter a few different activities before you'll see any data here though.  
+		<strong>Also, please signup if you want to be able to save your data!</strong>
+		<h3>Example</h3>
+		To see an example of the results you can get from this website, you can check out my blog post: <a href="http://www.moodtoolkit.com/blog/?p=11">Exactly How Much Does Doing the Dishes Improve Your Mood?</a>
+		
 		</p>
+	</div>
 {% endblock %}
