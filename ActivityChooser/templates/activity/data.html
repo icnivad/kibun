@@ -12,7 +12,7 @@
 	</tr>
 	{% for activity in actList %}
 	<tr>
-		<td>{{activity.activity}}</td>
+		<td><a href="/activity/detail/{{activity.id}}">{{activity.activity}}</a></td>
 		<td>{{activity.moodChange}}</td>
 		<td>{{activity.feltBetter}}</td>
 		<td>{{activity.goodChoice}}</td>

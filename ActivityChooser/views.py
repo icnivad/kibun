@@ -47,6 +47,7 @@ def data(request):
 	actList=[]
 	for activity in activities:
 		actList.append({
+			'id':activity.id,
 			'activity':activity.name,
 			'moodChange':activity.avgMoodChange(request),
 			'feltBetter':activity.avgFeltBetter(request),
@@ -55,3 +56,8 @@ def data(request):
 		})
 	actList=sorted(actList, key=itemgetter('moodChange'), reverse=True)
 	return render(request, 'activity/data.html', {'actList':actList})
+
+def detail(request, activity_id):
+	activity=Activity.objects.get_with_permission(request, activity_id)
+	ratings=ActivityRating.objects.special_filter(request, activity_id)
+	return render(request, 'activity/detail.html', {'ratings':reversed(ratings), 'activity':activity})

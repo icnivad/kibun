@@ -8,4 +8,5 @@ urlpatterns = patterns('',
     url(r'rate/', views.rateActivity, name='rate'),
     url(r'history/', views.history, name='history'),
     url(r'data/', views.data, name='data'),
+    url(r'detail/(?P<activity_id>\d*)', views.detail, name='activity_detail'),
 )

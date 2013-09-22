@@ -33,3 +33,7 @@ def deploy():
 	push()
 	static_media()
 	restart()
+
+def get_fixture():
+	run('cd /home/kanjidoc/webapps/kibun/kibun/; python2.7 manage.py dumpdata ActivityChooser > Fixtures/all_data.json')
+	get('/home/kanjidoc/webapps/kibun/kibun/Fixtures/all_data.json', '~/Desktop/MoodToolkit/kibun/Fixtures/all_data.json')

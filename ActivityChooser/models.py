@@ -59,6 +59,12 @@ class ActivityManager(models.Manager):
 			activities=Activity.get_stashed_in_session(request.session)
 		return (defActs | activities)
 	
+	def get_with_permission(self, request, pk):
+		activity=self.get(pk=pk)
+		if ((activity.user==None) or (activity.user==request.user) or (activity.stashed_in_session(request.session))):
+			return activity
+		return None
+		
 class Activity(UserData, SessionStashable):
 	context_count_name="activity_count"
 	name=models.CharField(max_length=200)
