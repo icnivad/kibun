@@ -9,7 +9,7 @@ class ActivityChooseForm(ModelForm):
 			'feeling': widgets.Select(choices=models.presetFeelings) ,
 			'preMood': widgets.Select(choices=models.presetMoods),
 		}
-		exclude=('preDateTime', 'postDateTime', 'postMood', 'feltBetter', 'goodChoice', 'comment')
+		exclude=('user', 'preDateTime', 'postDateTime', 'postMood', 'feltBetter', 'goodChoice', 'comment')
 
 class ActivityRatingForm(ModelForm):
 	class Meta:
@@ -17,4 +17,4 @@ class ActivityRatingForm(ModelForm):
 		widgets= {
 			'postMood': widgets.Select(choices=models.presetMoods)
 		}
-		exclude=('preDateTime', 'postDateTime', 'feeling', 'preMood', 'activity')
+		exclude=('user', 'preDateTime', 'postDateTime', 'feeling', 'preMood', 'activity')

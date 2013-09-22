@@ -44,7 +44,7 @@ boolChoices=(
 
 
 class UserData(models.Model):
-	user=models.ForeignKey(User, editable=False, blank=True, null=True)
+	user=models.ForeignKey(User, blank=True, null=True)
 	creator_field='user'
 	class Meta:
 		abstract=True
