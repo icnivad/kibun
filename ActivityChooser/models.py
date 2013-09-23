@@ -164,7 +164,9 @@ class ActivityRating(UserData, SessionStashable):
 	postMood=models.DecimalField(max_digits=3, decimal_places=1, blank=True, null=True)
 	postDateTime=models.DateTimeField(blank=True, null=True)	
 
-	feltBetter=models.CharField(verbose_name="Do you feel better?", choices=boolChoices, blank=True, default="", max_length=50)
+	#just changed felt better to enjoyThisActivity -> all previous assoc. data is probably bad now.  
+	#also should change name of field!!!! But that can wait I guess
+	feltBetter=models.CharField(verbose_name="Did you enjoy this activity?", choices=boolChoices, blank=True, default="", max_length=50)
 	goodChoice=models.CharField(verbose_name="Are you glad you did this activity?", choices=boolChoices, blank=True, default="", max_length=50) # are you glad you did the activity?
 	comment=models.TextField(blank=True, default="")
 
