@@ -18,13 +18,15 @@ def chooseActivity(request):
 	if request.method=='POST':
 		
 		#OK this is super not the way to do this, but oh well
+		#also, may end up trying to add an activity and not be able to
+		#super confusing probably, not at all the right way to do things
 		pvalues=request.POST.copy()
 		if not request.POST['activity']:
-			if len(request.POST['readable_activity']):
-				newActivity=Activity(name=request.POST['readable_activity'])
+			if len(request.POST['add_activity']):
+				newActivity=Activity(name=request.POST['add_activity'])
 				newActivity.save(request)
-				pvalues['activity']=newActivity.pk
-		aform=ActivityChooseForm(pvalues)
+				pvalues['activity']=newActivity.id
+		aform=ActivityChooseForm(pvalues, request=request)
 		
 		if aform.is_valid():
 			aRating=aform.save(commit=False)
@@ -35,8 +37,7 @@ def chooseActivity(request):
 			return render(request, 'activity/rate.html', {'rform':rform, 'activity':aRating.activity, 'pk':pk}) 
 		else:
 			return render(request, 'activity/choose.html', {'aform':aform})
-	aform=ActivityChooseForm()
-	aform.fields['activity'].queryset=Activity.objects.all_with_permission(request)
+	aform=ActivityChooseForm(request=request)
 	return render(request, 'activity/choose.html',{'aform':aform})
 
 def rateActivity(request):
