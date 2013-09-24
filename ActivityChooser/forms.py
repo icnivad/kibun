@@ -21,7 +21,7 @@ class ActivityChooseForm(ModelForm):
 			raise forms.ValidationError("Couldn't find activity")
 		return data
 
-	add_activity=forms.CharField(label="New Activity", widget=forms.TextInput(attrs={'id':'add_activity'}))
+	add_activity=forms.CharField(label="New Activity", widget=forms.TextInput(attrs={'id':'add_activity'}), required=False)
 	activity=forms.ChoiceField()
 	class Meta:
 		model=models.ActivityRating
