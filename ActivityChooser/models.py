@@ -9,6 +9,7 @@ import math
 
 #built in choices
 presetFeelings=(
+	('', '---------'),
 	('1', 'happy'),
 	('2', 'sad'),
 	('3', 'angry'),
@@ -22,6 +23,7 @@ presetFeelings=(
 	)
 
 presetMoods=(
+	('', '---------'),
 	('0', '0'),
 	('1', '1'),
 	('2', '2'),
@@ -155,13 +157,13 @@ class ActivityRating(UserData, SessionStashable):
 	objects=ActivityRatingManager()
 	
 	feeling=models.CharField(max_length=200)
-	preMood=models.DecimalField(max_digits=3, decimal_places=1)
+	preMood=models.DecimalField(verbose_name="What's your mood?", max_digits=3, decimal_places=1)
 	preDateTime=models.DateTimeField()
 
 	activity=models.ForeignKey(Activity)
 
 	#Info below is filled out only after activity is completed
-	postMood=models.DecimalField(max_digits=3, decimal_places=1, blank=True, null=True)
+	postMood=models.DecimalField(verbose_name="What's your mood now?", max_digits=3, decimal_places=1, blank=True, null=True)
 	postDateTime=models.DateTimeField(blank=True, null=True)	
 
 	#just changed felt better to enjoyThisActivity -> all previous assoc. data is probably bad now.  

@@ -5,7 +5,7 @@ from models import ActivityRating, Activity
 import datetime
 from operator import itemgetter
 from django_session_stashable import SessionStashable
-
+import json
 
 # Create your views here.
 def index(request):
@@ -16,13 +16,25 @@ def index(request):
 
 def chooseActivity(request):
 	if request.method=='POST':
-		aform=ActivityChooseForm(request.POST)
-		aRating=aform.save(commit=False)
-		aRating.preDateTime=datetime.datetime.now()
-		aRating.save(request)
-		rform=ActivityRatingForm(instance=aRating)
-		pk=aRating.id
-		return render(request, 'activity/rate.html', {'rform':rform, 'activity':aRating.activity, 'pk':pk}) 
+		
+		#OK this is super not the way to do this, but oh well
+		pvalues=request.POST.copy()
+		if not request.POST['activity']:
+			if len(request.POST['readable_activity']):
+				newActivity=Activity(name=request.POST['readable_activity'])
+				newActivity.save(request)
+				pvalues['activity']=newActivity.pk
+		aform=ActivityChooseForm(pvalues)
+		
+		if aform.is_valid():
+			aRating=aform.save(commit=False)
+			aRating.preDateTime=datetime.datetime.now()
+			aRating.save(request)
+			rform=ActivityRatingForm(instance=aRating)
+			pk=aRating.id
+			return render(request, 'activity/rate.html', {'rform':rform, 'activity':aRating.activity, 'pk':pk}) 
+		else:
+			return render(request, 'activity/choose.html', {'aform':aform})
 	aform=ActivityChooseForm()
 	aform.fields['activity'].queryset=Activity.objects.all_with_permission(request)
 	return render(request, 'activity/choose.html',{'aform':aform})
@@ -60,4 +72,12 @@ def data(request):
 def detail(request, activity_id):
 	activity=Activity.objects.get_with_permission(request, activity_id)
 	ratings=ActivityRating.objects.special_filter(request, activity_id)
-	return render(request, 'activity/detail.html', {'ratings':reversed(ratings), 'activity':activity})
+	return render(request, 'activity/detail.html', {'ratings':reversed(ratings),'activity':activity})
+
+
+def getActivities(request):
+	activities=Activity.objects.all_with_permission(request)
+	act=[]
+	for a in activities:
+		act.append({'label':a.name, 'value':str(a.pk)})
+	return HttpResponse(json.dumps(act))
