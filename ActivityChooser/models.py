@@ -3,7 +3,7 @@ from django.db.models import Avg
 from django.contrib.auth.models import User
 from django_session_stashable import SessionStashable
 
-import math 
+import math, decimal
 
 # Create your models here.
 
@@ -106,8 +106,11 @@ class Activity(UserData, SessionStashable):
 				else:
 					completeRatings+=1.0
 					avg+=r.postMood - r.preMood
-			avg=avg/completeRatings
-			return math.ceil(avg*100)/100
+			if completeRatings>0:
+				avg=avg/decimal.Decimal(completeRatings)
+				return math.ceil(avg*100)/100
+			else:
+				return ""
 		
 	def avgFeltBetter(self, request):
 		pcount=ActivityRating.objects.special_filter(request, self.id).filter(feltBetter="Yes").count()
