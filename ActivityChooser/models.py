@@ -99,12 +99,14 @@ class Activity(UserData, SessionStashable):
 			return ""
 		else:
 			avg=0
+			completeRatings=0.0
 			for r in ratings:
 				if((r.postMood==None) or (r.preMood==None)):
 					pass
 				else:
+					completeRatings+=1.0
 					avg+=r.postMood - r.preMood
-			avg=avg/len(ratings)
+			avg=avg/completeRatings
 			return math.ceil(avg*100)/100
 		
 	def avgFeltBetter(self, request):
