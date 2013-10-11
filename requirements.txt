@@ -2,3 +2,6 @@ django-registration
 django-session-stashable
 south
 django-lazysignup
+webtest
+django-webtest
+django-nose

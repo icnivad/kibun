@@ -8,6 +8,8 @@ myFilePath=os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
+TEST_RUNNER = 'django_nose.NoseTestSuiteRunner'
+
 ADMINS = (
      ('Ben Earle', 'bearle2009@gmail.com'),
 )
@@ -140,6 +142,7 @@ INSTALLED_APPS = (
      'registration',
      'south',
      'lazysignup',
+     'django_nose',
 )
 
 # A sample logging configuration. The only tangible logging
