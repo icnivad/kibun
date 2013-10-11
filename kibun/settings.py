@@ -3,6 +3,8 @@ from local_settings import *
 
 import os, sys
 
+ALLOWED_HOSTS=['localhost', 'www.moodtoolkit.com']
+
 myFilePath=os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
 
 
