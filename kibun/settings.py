@@ -5,8 +5,6 @@ import os, sys
 
 myFilePath=os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
 
-DEBUG = True
-TEMPLATE_DEBUG = DEBUG
 
 ADMINS = (
      ('Ben Earle', 'bearle2009@gmail.com'),
