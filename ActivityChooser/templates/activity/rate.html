@@ -4,7 +4,7 @@
 		{% include 'registration/login_invitation.html' %}
 		 <h2>You picked: {{activity}}</h2>
 		 <h3>Did you enjoy this activity?</h3>
-		<form action="/activity/rate/" method="post">
+		<form action="/activity/{{pk}}/rate/" method="post">
 			{% csrf_token %}
 			<fieldset>
 			{{rform}}

@@ -9,6 +9,8 @@ import json
 
 # Create your views here.
 def index(request):
+	if request.user.is_authenticated():
+		return redirect('/activity/dashboard/')
 	return redirect('/activity/choose')
 
 #my method of dealing with model ids is going to be hacky.  This should probably end up in a session when I make it possible to have
@@ -34,22 +36,26 @@ def chooseActivity(request):
 			aRating.save(request)
 			rform=ActivityRatingForm(instance=aRating)
 			pk=aRating.id
-			return render(request, 'activity/rate.html', {'rform':rform, 'activity':aRating.activity, 'pk':pk}) 
+			redirectURL='/activity/'+str(pk)+'/rate/'
+			return redirect(redirectURL) 
 		else:
 			return render(request, 'activity/choose.html', {'aform':aform})
 	aform=ActivityChooseForm(request=request)
 	return render(request, 'activity/choose.html',{'aform':aform})
 
-def rateActivity(request):
+#This can probably be cleaned up a bunch - kind of crufty
+def rateActivity(request, rating_id):
 	if request.method=='POST':
-		aRating=ActivityRating.objects.get_with_permission(request, pk=request.POST['pk'])
+		aRating=ActivityRating.objects.get_with_permission(request, pk=rating_id)
 		rform=ActivityRatingForm(request.POST, instance=aRating)
 		aRating=rform.save(commit=False)
 		aRating.postDateTime=datetime.datetime.now()
 		aRating.save(request)
 		return redirect('/activity')
 	else:
-		pass	
+		aRating=ActivityRating.objects.get_with_permission(request, pk=rating_id)
+		rform=ActivityRatingForm(instance=aRating)
+		return render(request, 'activity/rate.html', {'rform':rform, 'activity':aRating.activity.name, 'pk':rating_id})
 
 def history(request):
 	ratings=ActivityRating.objects.all_with_permission(request)
@@ -68,7 +74,7 @@ def data(request):
 			'count':activity.actCount(request),
 		})
 	actList=sorted(actList, key=itemgetter('moodChange'), reverse=True)
-	return render(request, 'activity/data.html', {'actList':actList})
+	return render(request, 'activity/data_summary.html', {'actList':actList})
 
 def detail(request, activity_id):
 	activity=Activity.objects.get_with_permission(request, activity_id)
@@ -82,3 +88,13 @@ def getActivities(request):
 	for a in activities:
 		act.append({'label':a.name, 'value':str(a.pk)})
 	return HttpResponse(json.dumps(act))
+
+def dashboard(request):
+	unrated=ActivityRating.objects.get_recent_unrated(request)
+	recent=ActivityRating.objects.get_recent_rated(request)
+	
+	now=datetime.datetime.now()
+	start=now-datetime.timedelta(hours=36)
+	unrated=unrated.filter(preDateTime__range=(start, now))
+	
+	return render(request, 'activity/dashboard.html', {'unrated':unrated, 'recent':recent[:5]})

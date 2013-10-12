@@ -18,8 +18,8 @@ MANAGERS = ADMINS
 
 
 #Django-registration constants
-LOGIN_REDIRECT_URL="/activity/history"
-REGISTER_REDIRECT_URL="/activity/history"
+LOGIN_REDIRECT_URL="/activity/dashboard/"
+REGISTER_REDIRECT_URL="/activity/dashboard/"
 SUCCESS_URL="/activity/history"
 ACCOUNT_ACTIVATION_DAYS = 7
 

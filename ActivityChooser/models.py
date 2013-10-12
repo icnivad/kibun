@@ -153,6 +153,18 @@ class ActivityRatingManager(models.Manager):
 		if request.user.is_active:
 			aratings=aratings | self.filter(user=request.user).filter(activity=activity_id)
 		return aratings
+	
+	def get_recent_unrated(self, request):
+		aratings=ActivityRating.get_stashed_in_session(request.session).filter(postMood__isnull=True)
+		if request.user.is_active:
+			aratings=aratings | self.filter(user=request.user, postMood__isnull=True)
+		return aratings.order_by('-preDateTime')
+		
+	def get_recent_rated(self, request):
+		aratings=ActivityRating.get_stashed_in_session(request.session).filter(postMood__isnull=False)
+		if request.user.is_active:
+			aratings=aratings | self.filter(user=request.user, postMood__isnull=False)
+		return aratings.order_by('-preDateTime')
 
 
 class ActivityRating(UserData, SessionStashable):

@@ -4,8 +4,9 @@ from ActivityChooser import views
 urlpatterns = patterns('',
     # Examples:
     url(r'^$', views.index, name="index"),
+    url(r'dashboard/', views.dashboard, name='dashboard'),
     url(r'choose/', views.chooseActivity, name='choose'),
-    url(r'rate/', views.rateActivity, name='rate'),
+    url(r'(?P<rating_id>\d*)/rate/', views.rateActivity, name='rate'),
     url(r'history/', views.history, name='history'),
     url(r'data/', views.data, name='data'),
     url(r'detail/(?P<activity_id>\d*)', views.detail, name='activity_detail'),
