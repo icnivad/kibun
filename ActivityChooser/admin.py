@@ -1,5 +1,5 @@
 from django.contrib import admin
-from ActivityChooser.models import Activity, ActivityRating
+from ActivityChooser.models import Activity, ActivityRating, ActivityTag
 from django import forms
 from django.contrib.auth.models import User
 
@@ -22,3 +22,4 @@ class ActivityRatingAdmin(admin.ModelAdmin):
 
 admin.site.register(Activity, ActivityAdmin)
 admin.site.register(ActivityRating, ActivityRatingAdmin)
+admin.site.register(ActivityTag)
