@@ -51,6 +51,11 @@ class UserData(models.Model):
 	class Meta:
 		abstract=True
 
+class ActivityTag(UserData, SessionStashable):
+	session_variable='tag_stash'
+	name=models.CharField(max_length=200)
+	activities=models.ManyToManyField('Activity')
+	
 class ActivityManager(models.Manager):
 	def all_with_permission(self, request):
 		defActs=self.filter(is_default=True)
@@ -204,6 +209,8 @@ class ActivityRating(UserData, SessionStashable):
 		else:
 			super(ActivityRating, self).save()
 			self.stash_in_session(request.session)
+		
+	
 		
 		
 		

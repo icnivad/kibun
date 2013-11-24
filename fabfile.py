@@ -9,6 +9,10 @@ prompt("Enter key: ", "password")
 def prep_deploy():
 	local('git push origin master')
 
+def local_migrate():
+	local('python manage.py schemamigration ActivityChooser --auto')
+	local('python manage.py syncdb')
+	local('python manage.py migrate ActivityChooser')
 
 ####### Server Commands
 def push():
@@ -16,6 +20,10 @@ def push():
 
 def static_media():
 	run('cd /home/kanjidoc/webapps/kibun/kibun/; python2.7 manage.py collectstatic')
+
+def migrate_db():
+	run('cd /home/kanjidoc/webapps/kibun/kibun/; python2.7 manage.py syncdb')
+	run('cd /home/kanjidoc/webapps/kibun/kibun/; python2.7 manage.py migrate ActivityChooser')
 
 def restart():
 	run('/home/kanjidoc/webapps/kibun/apache2/bin/restart')
@@ -34,6 +42,14 @@ def deploy():
 	static_media()
 	restart()
 
+def migrate_deploy():
+	prep_deploy()
+	push()
+	static_media()
+	migrate_db()
+	restart()
+
 def get_fixture():
 	run('cd /home/kanjidoc/webapps/kibun/kibun/; python2.7 manage.py dumpdata ActivityChooser > Fixtures/all_data.json')
 	get('/home/kanjidoc/webapps/kibun/kibun/Fixtures/all_data.json', '~/Desktop/MoodToolkit/kibun/Fixtures/all_data.json')
+
