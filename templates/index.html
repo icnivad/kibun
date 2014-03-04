@@ -1,22 +1,15 @@
 {% extends 'navbase.html' %}
 {% block title %} MoodToolkit {% endblock %}
 {% block content %}
-	<div class='span6'>
+	<div class='col-md-6'>
 	<h1>Welcome to MoodToolkit</h1>
-		<p>This website helps you keep track of how different activities affect your mood.
+		<p>
+		This site helps you identify the activities that most improve your mood.  Just pick an activity, then share how you feel before and after the activity.  
+		This website will keep track of whether the activity improves your mood.  You can also compare activities to see which activity is best at improving your mood.  
 		<br/>
-		<h3>How to use this site:</h3>
-		<strong>Step 1:</strong> go to <a href="/activity/choose">Choose Activity</a><br/>
-		<strong>Step 2:</strong> Enter your current feeling and mood, and an activity you'd like to do.<br/>
-		<strong>Step 3:</strong> After completing the activity, enter your new mood.<br/>
-		<strong>Step 4:</strong>You can see a list of your activities at <a href="/activity/history">Activity History</a>
-		and you can see a summary of how different activities affect your mood at <a href="/activity/data">Activity Summary</a>.
-		<br/>
-		You'll have to enter a few different activities before you'll see any data here though.  
-		<strong>Also, please <a href="/accounts/register">signup</a> if you want to be able to save your data!</strong>
-		<h3>Example</h3>
-		To see an example of the results you can get from this website, you can check out my blog post: <a href="http://www.moodtoolkit.com/blog/?p=11">Exactly How Much Does Doing the Dishes Improve Your Mood?</a>
-		
+		Click one of the buttons below to learn more.  
+		<br/><br/>
+		<a  href="/info/patients" class="btn btn-primary">For Patients</a><a href="/info/providers" class="btn btn-primary col-md-offset-2">For Providers</a>
 		</p>
 	</div>
 {% endblock %}

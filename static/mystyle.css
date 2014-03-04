@@ -13,6 +13,7 @@
 #log_in input {
 	width:100px;
 	cursor:text;
+	display: inline;
 }
 
 #log_in input.topbar_submit {

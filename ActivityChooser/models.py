@@ -54,6 +54,7 @@ class UserData(models.Model):
 class ActivityTag(UserData, SessionStashable):
 	session_variable='tag_stash'
 	name=models.CharField(max_length=200)
+	related_name="activitytags"
 	activities=models.ManyToManyField('Activity')
 	
 class ActivityManager(models.Manager):

@@ -89,6 +89,18 @@ def getActivities(request):
 		act.append({'label':a.name, 'value':str(a.pk)})
 	return HttpResponse(json.dumps(act))
 
+def editActivities(request):
+	activities=Activity.objects.all_with_permission(request)
+	actList=[]
+	for activity in activities:
+		actList.append({
+			'id':activity.id,
+			'activity':activity.name,
+			'tags':activity.activitytags.all(),
+			'count':activity.actCount(request),
+		})
+	return render(request, 'activity/edit.html', {'actList':actList})
+
 def dashboard(request):
 	unrated=ActivityRating.objects.get_recent_unrated(request)
 	recent=ActivityRating.objects.get_recent_rated(request)

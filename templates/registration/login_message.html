@@ -6,8 +6,8 @@
 	<span id="log_in">
 	<form action="/accounts/login/" method="POST">
 		{% csrf_token %}
-		<input id="id_username" type="text" maxlength="20" name="username" placeholder="username">
-		<input id="id_password" type="password" maxlength="20" name="password" placeholder="password">
+		<input id="id_username" type="text" class="form-control" maxlength="20" name="username" placeholder="username">
+		<input id="id_password" type="password" class="form-control" maxlength="20" name="password" placeholder="password">
 		<input type="submit" class="topbar_submit" value="Log In"/>
 	</form>
 	</span>

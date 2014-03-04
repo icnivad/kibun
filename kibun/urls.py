@@ -16,6 +16,10 @@ urlpatterns = patterns('',
     url(r'^activity/', include('ActivityChooser.urls', namespace='activity')),
     # url(r'^kibun/', include('kibun.foo.urls')),
 
+    #info about the site
+    url(r'^info/provider', TemplateView.as_view(template_name='info/providers.html')),
+    url(r'^info/patient', TemplateView.as_view(template_name='info/patients.html')),
+
     # Uncomment the admin/doc line below to enable admin documentation:
      url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
 
