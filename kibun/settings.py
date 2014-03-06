@@ -16,6 +16,8 @@ ADMINS = (
 
 MANAGERS = ADMINS
 
+#Django-crispy-constant
+CRISPY_TEMPLATE_PACK='bootstrap3'
 
 #Django-registration constants
 LOGIN_REDIRECT_URL="/activity/dashboard/"
@@ -139,6 +141,7 @@ INSTALLED_APPS = (
      'south',
      'lazysignup',
      'django_nose',
+     'crispy_forms',
 )
 
 # A sample logging configuration. The only tangible logging

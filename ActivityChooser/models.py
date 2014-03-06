@@ -54,8 +54,8 @@ class UserData(models.Model):
 class ActivityTag(UserData, SessionStashable):
 	session_variable='tag_stash'
 	name=models.CharField(max_length=200)
-	related_name="activitytags"
-	activities=models.ManyToManyField('Activity')
+	activities=models.ManyToManyField('Activity', related_name="activitytags")
+
 	
 class ActivityManager(models.Manager):
 	def all_with_permission(self, request):
@@ -72,10 +72,17 @@ class ActivityManager(models.Manager):
 		if ((activity.is_default) or (activity.user==request.user) or (activity.stashed_in_session(request.session))):
 			return activity
 		return None
+	
+	def delete_with_permission(self, request, pk):
+		activity=self.get(pk=pk)
+		if ((activity.user==request.user) or (activity.stashed_in_session(request.session))):
+			activity.delete()
+			return True
+		return False
 		
 class Activity(UserData, SessionStashable):
 	context_count_name="activity_count"
-	name=models.CharField(max_length=200)
+	name=models.CharField(max_length=200, verbose_name="Activity Name")
 	objects=ActivityManager()
 	
 	is_default=models.BooleanField(default=False)

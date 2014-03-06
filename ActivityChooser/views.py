@@ -1,11 +1,12 @@
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
-from forms import ActivityChooseForm, ActivityRatingForm
+from forms import ActivityChooseForm, ActivityRatingForm, ActivityForm
 from models import ActivityRating, Activity
 import datetime
 from operator import itemgetter
 from django_session_stashable import SessionStashable
 import json
+from django.views.decorators.csrf import csrf_exempt
 
 # Create your views here.
 def index(request):
@@ -48,10 +49,13 @@ def rateActivity(request, rating_id):
 	if request.method=='POST':
 		aRating=ActivityRating.objects.get_with_permission(request, pk=rating_id)
 		rform=ActivityRatingForm(request.POST, instance=aRating)
-		aRating=rform.save(commit=False)
-		aRating.postDateTime=datetime.datetime.now()
-		aRating.save(request)
-		return redirect('/activity')
+		if rform.is_valid():
+			aRating=rform.save(commit=False)
+			aRating.postDateTime=datetime.datetime.now()
+			aRating.save(request)
+			return redirect('/activity')
+		else:
+			return render(request, 'activity/rate.html', {'rform':rform, 'activity':aRating.activity.name, 'pk':rating_id})
 	else:
 		aRating=ActivityRating.objects.get_with_permission(request, pk=rating_id)
 		rform=ActivityRatingForm(instance=aRating)
@@ -89,7 +93,34 @@ def getActivities(request):
 		act.append({'label':a.name, 'value':str(a.pk)})
 	return HttpResponse(json.dumps(act))
 
+@csrf_exempt #This definitely needs to change!  But laziness - security hole though!!!!
+def deleteActivity(request):
+	if request.method=='POST':
+		id=request.POST['id']
+		result=Activity.objects.delete_with_permission(request, id)
+		if result:
+			return HttpResponse(id)
+		else:
+			return HttpResponse("")
+
 def editActivities(request):
+	if request.method=='POST':
+		actForm=ActivityForm(request.POST)
+		createdActivity=actForm.save(commit=False)
+		createdActivity.save(request)
+		actForm=ActivityForm()
+		activities=Activity.objects.all_with_permission(request)
+		actList=[]
+		for activity in activities:
+			actList.append({
+				'id':activity.id,
+				'activity':activity.name,
+				'tags':activity.activitytags.all(),
+				'count':activity.actCount(request),
+			})
+		
+		return render(request, 'activity/edit.html', {'actList':actList, 'actForm':actForm})
+	
 	activities=Activity.objects.all_with_permission(request)
 	actList=[]
 	for activity in activities:
@@ -99,7 +130,9 @@ def editActivities(request):
 			'tags':activity.activitytags.all(),
 			'count':activity.actCount(request),
 		})
-	return render(request, 'activity/edit.html', {'actList':actList})
+	
+	actForm=ActivityForm()
+	return render(request, 'activity/edit.html', {'actList':actList, 'actForm':actForm})
 
 def dashboard(request):
 	unrated=ActivityRating.objects.get_recent_unrated(request)

@@ -1,16 +1,19 @@
 {% extends 'activity/base.html' %}
+{% load crispy_forms_tags %}
 {% block title %} Choose Activity {% endblock %}
 {% block content %} 
 		{% include 'registration/login_invitation.html' %}
 		 <h2>You picked: {{activity}}</h2>
 		 <h3>Did you enjoy this activity?</h3>
+		 <div class="col-md-4">
 		<form action="/activity/{{pk}}/rate/" method="post">
 			{% csrf_token %}
 			<fieldset>
-			{{rform}}
+			{{rform|crispy}}
 			<input type='hidden' name='pk' value='{{pk}}'/>
 			<br/>
 		    <input type="submit" class="btn btn-large btn-primary" value="Rate Activity"/>
 			</fieldset>
 		</form>
+		</div>
 {% endblock%}

@@ -1,4 +1,24 @@
 $(document).ready(function(){
+	
+	/*For deleting activities - probably should have separate js files but oh well */
+	$(".delete_activity").click(function(){
+		var name=$(this).closest("tr").find(".activityName").text();
+		var count=$(this).closest("tr").find(".activityCount").text();
+		var id=$(this).attr("activity_id");
+		$("#myModal").find("span#activityToDelete").html(name);
+		$("#myModal").find("span#activityToDeleteCount").html(count);
+		$("#deleteActivityButton").attr("activity_id", id)
+	});
+	
+	$("#deleteActivityButton").click(function(){
+		var id=$(this).attr("activity_id");
+		$.post("/activity/delete/", {"id":id}, function(data){
+			$("#"+data).hide();
+		});
+			
+	});
+	
+	/*For adding a new activity*/
 	function activity_hide(){
 		$("#add_activity").hide();
 		$("label[for='add_activity']").hide();

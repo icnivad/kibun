@@ -34,9 +34,18 @@ class ActivityChooseForm(ModelForm):
 	
 
 class ActivityRatingForm(ModelForm):
+	def __init__(self, *args, **kwargs):
+		super(ActivityRatingForm, self).__init__(*args, **kwargs)
+		self.fields['postMood'].required = True
+	
 	class Meta:
 		model=models.ActivityRating
 		widgets= {
 			'postMood': widgets.Select(choices=models.presetMoods)
 		}
 		exclude=('user', 'preDateTime', 'postDateTime', 'feeling', 'preMood', 'activity')
+
+class ActivityForm(ModelForm):
+	class Meta:
+		model=models.Activity
+		exclude=('user', 'is_default')

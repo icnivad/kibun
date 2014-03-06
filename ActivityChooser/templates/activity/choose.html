@@ -1,14 +1,17 @@
 {% extends 'activity/base.html' %}
+{% load crispy_forms_tags %}
 {% block title %} Choose Activity {% endblock %}
 {% block content %} 
 		{% include 'registration/login_invitation.html' %}
 		<h1>How do you feel?</h1>
+		<div class="col-md-4">
 		<form action="/activity/choose/" method="post">
 			{% csrf_token %}
 			<fieldset>
-			{{aform}}
+			{{aform|crispy}}
 			<br/>
 		    <input type="submit" class="btn btn-large btn-primary" value="Select Activity"/>
 			</fieldset>
 		</form>
+		</div>
 {% endblock %}

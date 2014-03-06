@@ -5,3 +5,4 @@ django-lazysignup
 webtest
 django-webtest
 django-nose
+django-crispy-forms

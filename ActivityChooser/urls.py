@@ -12,4 +12,6 @@ urlpatterns = patterns('',
     url(r'detail/(?P<activity_id>\d*)', views.detail, name='activity_detail'),
     url(r'getActivities/', views.getActivities, name='getActivities'),
     url(r'edit/', views.editActivities, name='editActivities'),
+    url(r'delete/', views.deleteActivity, name='deleteActivity'),
+
 )
