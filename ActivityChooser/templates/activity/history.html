@@ -38,10 +38,10 @@
 			{{r.preDateTime}}
 		</td>
 		<td>
-			{{r.feeling}}
+			{{r.get_feeling_display}}
 		</td>
 		<td>
-			{{r.activity}}
+			<a href="/activity/detail/{{r.activity.pk}}">{{r.activity}}</a>
 		</td>
 		<td>
 			{{r.preMood}}

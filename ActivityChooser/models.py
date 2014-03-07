@@ -9,7 +9,6 @@ import math, decimal
 
 #built in choices
 presetFeelings=(
-	('', '---------'),
 	('1', 'happy'),
 	('2', 'sad'),
 	('3', 'angry'),
@@ -79,7 +78,7 @@ class ActivityManager(models.Manager):
 			activity.delete()
 			return True
 		return False
-		
+	
 class Activity(UserData, SessionStashable):
 	context_count_name="activity_count"
 	name=models.CharField(max_length=200, verbose_name="Activity Name")
@@ -178,6 +177,12 @@ class ActivityRatingManager(models.Manager):
 		if request.user.is_active:
 			aratings=aratings | self.filter(user=request.user, postMood__isnull=False)
 		return aratings.order_by('-preDateTime')
+	
+	def best_moods(self, request):
+		pass
+		
+	def worst_moods(self, request):
+		pass
 
 
 class ActivityRating(UserData, SessionStashable):
@@ -188,7 +193,7 @@ class ActivityRating(UserData, SessionStashable):
 	
 	objects=ActivityRatingManager()
 	
-	feeling=models.CharField(max_length=200)
+	feeling=models.CharField(max_length=200, choices=presetFeelings)
 	preMood=models.DecimalField(verbose_name="What's your mood?", max_digits=3, decimal_places=1)
 	preDateTime=models.DateTimeField()
 

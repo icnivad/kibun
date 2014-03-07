@@ -3,7 +3,7 @@
 {% block content %} 
 		<h1>Choose Another Activity</h1>
 		<h4><a href="/activity/choose/">Choose Activity</a></h4>
-		You can also check out your <a href="/activity/history/">Activity History</a>, <a href="/activity/edit">Edit Activities</a>, or see a <a href="/activity/data/">Summary of Your Activities</a>.
+		You can also check out your <a href="/activity/history/">Activity History</a>, <a href="/activity/edit">Edit Activities</a>, or see a <a href="/activity/summary/">Summary of Your Activities</a>.
 		 <h1>Activities to Rate</h1>
 		 {% for a in unrated %}
 		 <a href="/activity/{{a.pk}}/rate">{{a.preDateTime|date:'l g:i A'}}: {{a.activity}}</a><br/>

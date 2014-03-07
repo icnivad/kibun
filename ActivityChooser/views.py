@@ -78,7 +78,30 @@ def data(request):
 			'count':activity.actCount(request),
 		})
 	actList=sorted(actList, key=itemgetter('moodChange'), reverse=True)
-	return render(request, 'activity/data_summary.html', {'actList':actList})
+	return render(request, 'activity/data.html', {'actList':actList})
+
+def data_summary(request):
+	activities=Activity.objects.all_with_permission(request)
+	best=[]
+	worst=[]
+	for activity in activities:
+		count=activity.actCount(request)
+		if count>0:
+			mood=activity.avgMoodChange(request)
+			toAdd={
+				'id':activity.id,
+				'activity':activity.name,
+				'moodChange':mood,
+				'count':count,
+			}
+			if mood>0:
+				best.append(toAdd)
+			else:
+				worst.append(toAdd)
+	best=sorted(best, key=itemgetter('moodChange'), reverse=True)
+	worst=sorted(worst, key=itemgetter('moodChange'))
+	return render(request, 'activity/data_summary.html', {'best_activities':best, 'worst_activities':worst})
+
 
 def detail(request, activity_id):
 	activity=Activity.objects.get_with_permission(request, activity_id)
