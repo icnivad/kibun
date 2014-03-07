@@ -85,9 +85,9 @@ def data_summary(request):
 	best=[]
 	worst=[]
 	for activity in activities:
-		count=activity.actCount(request)
-		if count>0:
-			mood=activity.avgMoodChange(request)
+		mood=activity.avgMoodChange(request)
+		if mood is not None:
+			count=activity.actCount(request)
 			toAdd={
 				'id':activity.id,
 				'activity':activity.name,

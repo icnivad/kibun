@@ -108,7 +108,7 @@ class Activity(UserData, SessionStashable):
 		ratings=ActivityRating.objects.special_filter(request, self.id)
 		count=len(ratings)
 		if (count==0):
-			return ""
+			return None
 		else:
 			avg=0
 			completeRatings=0.0
@@ -122,7 +122,7 @@ class Activity(UserData, SessionStashable):
 				avg=avg/decimal.Decimal(completeRatings)
 				return math.ceil(avg*100)/100
 			else:
-				return ""
+				return None
 		
 	def avgFeltBetter(self, request):
 		pcount=ActivityRating.objects.special_filter(request, self.id).filter(feltBetter="Yes").count()
