@@ -103,7 +103,7 @@ def deleteActivity(request):
 		else:
 			return HttpResponse("")
 
-def editActivities(request):
+def editActivities(request, template_name):
 	if request.method=='POST':
 		actForm=ActivityForm(request.POST)
 		createdActivity=actForm.save(commit=False)
@@ -119,7 +119,7 @@ def editActivities(request):
 				'count':activity.actCount(request),
 			})
 		
-		return render(request, 'activity/edit.html', {'actList':actList, 'actForm':actForm})
+		return render(request, template_name, {'actList':actList, 'actForm':actForm})
 	
 	activities=Activity.objects.all_with_permission(request)
 	actList=[]
@@ -132,7 +132,7 @@ def editActivities(request):
 		})
 	
 	actForm=ActivityForm()
-	return render(request, 'activity/edit.html', {'actList':actList, 'actForm':actForm})
+	return render(request, template_name, {'actList':actList, 'actForm':actForm})
 
 def dashboard(request):
 	unrated=ActivityRating.objects.get_recent_unrated(request)

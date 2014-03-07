@@ -11,7 +11,8 @@ urlpatterns = patterns('',
     url(r'data/', views.data, name='data'),
     url(r'detail/(?P<activity_id>\d*)', views.detail, name='activity_detail'),
     url(r'getActivities/', views.getActivities, name='getActivities'),
-    url(r'edit/', views.editActivities, name='editActivities'),
+    url(r'edit/new', views.editActivities, {'template_name':"activity/edit_new.html"}, name='editActivities'),
+    url(r'edit/', views.editActivities, {'template_name':"activity/edit.html"}, name='editActivities'),
     url(r'delete/', views.deleteActivity, name='deleteActivity'),
 
 )

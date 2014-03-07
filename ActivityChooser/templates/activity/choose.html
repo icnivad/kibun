@@ -3,7 +3,12 @@
 {% block title %} Choose Activity {% endblock %}
 {% block content %} 
 		{% include 'registration/login_invitation.html' %}
-		<h1>How do you feel?</h1>
+		<h1>Choose an Activity</h1>
+		<div class="container-fluid">
+		<div class="col-md-6">Rate how you feel before the activity.  Once you're done with the activity, you'll have another chance to rate how you feel so you can see how the activity affects your mood.
+		</div>
+		</div>
+		<br/>
 		<div class="col-md-4">
 		<form action="/activity/choose/" method="post">
 			{% csrf_token %}
