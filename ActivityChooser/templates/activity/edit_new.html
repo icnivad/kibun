@@ -1,0 +1,42 @@
+{% extends 'activity/base.html' %}
+{% block title %} Edit Activities {% endblock %}
+{% block content %} 
+		{% include 'registration/login_invitation.html' %}
+		<h1>Welcome to MoodToolkit!</h1>
+		<p>Add some activities that you think will help improve your mood.  You can always add more activities later.  After you've added a few activities, <a href="/activity/choose/">pick one to try out</a>.  
+		</p>
+		<div class="alert alert-info">
+		<form action="/activity/edit/" method="post">{% csrf_token %}
+			{{actForm}} <button class="btn btn-primary">Add New Activity</button></form>
+		</div>
+		<table class="table table-striped">
+		<thead><tr><td>Activity</td><!--td>Tags</td--><td>Number of times you've done this activity</td><td>Action</td></tr></thead>
+		<tbody>{% for activity in actList reversed %}
+			<tr id="{{activity.id}}"><td class="activityName">{{activity.activity}}</td><!--td>{% for tag in activity.tags%} {{tag.name}} {% endfor %}</td--><td class="activityCount">{{activity.count}}</td>
+			<td><!--button class="btn btn-primary">edit</button--> <button activity_id="{{activity.id}}" class="delete_activity btn btn-danger" data-toggle="modal" data-target="#myModal">delete</button></td></tr>
+		{% endfor %}
+		</tbody>
+		</table>
+		
+
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title" id="myModalLabel">Are you sure you want to delete the activity: <span id="activityToDelete" style="color:blue;"></span></h4>
+      </div>
+      <div class="modal-body">
+	So far you have completed this activity <span id="activityToDeleteCount" class="badge alert-info"></span> times.  Deleting this activity will also delete all notes you have made about this activity.  Are you sure you want to do this?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger pull-left btn-sm" data-dismiss="modal" id="deleteActivityButton">Delete Activity</button>
+        <button type="button" class="btn btn-primary btn-lg" data-dismiss="modal">Cancel</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+		
+{% endblock %}
