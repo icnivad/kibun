@@ -12,7 +12,7 @@ admin.autodiscover()
 urlpatterns = patterns('',
     # Examples:
     url(r'^$', views.index, name='homepage'),
-    url(r'users/', RedirectView.as_view(url='/activity/history')), #terrible, terrible way to do things, but it will work for the moment
+    url(r'users/', RedirectView.as_view(url='/activity/edit/new')), #terrible, terrible way to do things, but it will work for the moment
     url(r'^activity/', include('ActivityChooser.urls', namespace='activity')),
     # url(r'^kibun/', include('kibun.foo.urls')),
 
