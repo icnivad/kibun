@@ -15,7 +15,7 @@
 	</thead>
 	<tbody>
 		
-		{% for act in best_activities %}
+		{% for act in activities %}
 		<tr>
 		<td><a href="/activity/detail/{{act.id}}">{{act.activity}}</a></td><td>{{act.moodChange|stringformat:"+.2f" }}</td><td>{{act.count}}</td>
 		</tr>

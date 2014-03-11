@@ -82,8 +82,9 @@ def data(request):
 
 def data_summary(request):
 	activities=Activity.objects.all_with_permission(request)
-	best=[]
-	worst=[]
+	#best=[]
+	#worst=[]
+	actList=[]
 	for activity in activities:
 		mood=activity.avgMoodChange(request)
 		if mood is not None:
@@ -94,13 +95,15 @@ def data_summary(request):
 				'moodChange':mood,
 				'count':count,
 			}
-			if mood>0:
-				best.append(toAdd)
-			else:
-				worst.append(toAdd)
-	best=sorted(best, key=itemgetter('moodChange'), reverse=True)
-	worst=sorted(worst, key=itemgetter('moodChange'))
-	return render(request, 'activity/data_summary.html', {'best_activities':best, 'worst_activities':worst})
+			actList.append(toAdd)
+			#if mood>0:
+			#	best.append(toAdd)
+			#else:
+			#	worst.append(toAdd)
+	actList=sorted(actList, key=itemgetter('moodChange'), reverse=True)
+	#best=sorted(best, key=itemgetter('moodChange'), reverse=True)
+	#worst=sorted(worst, key=itemgetter('moodChange'))
+	return render(request, 'activity/data_summary.html', {'activities':actList})
 
 
 def detail(request, activity_id):
