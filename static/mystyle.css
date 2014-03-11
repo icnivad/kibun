@@ -16,7 +16,7 @@
 	display: inline;
 }
 
-#log_in input.topbar_submit {
+#log_in .topbar_submit {
 	background-color:inherit;
 	border:none;
 	border-radius:0px;

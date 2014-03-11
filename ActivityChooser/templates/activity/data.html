@@ -14,9 +14,9 @@
 	{% if activity.count %}
 	<tr>
 		<td><a href="/activity/detail/{{activity.id}}">{{activity.activity}}</a></td>
-		<td>{{activity.moodChange}}</td>
-		<td>{{activity.feltBetter}}</td>
-		<td>{{activity.goodChoice}}</td>
+		<td>{{activity.moodChange|stringformat:"+.2f"}}</td>
+		<td>{{activity.feltBetter|stringformat:"+.2f"}}</td>
+		<td>{{activity.goodChoice|stringformat:"+.2f"}}</td>
 		<td>{{activity.count}}</td>
 	</tr>
 	{% endif %}

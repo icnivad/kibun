@@ -1,9 +1,10 @@
-<div class="row">
+{% load crispy_forms_tags %}
+<div class="row col-md-6">
 <h1>Welcome to the Mood Toolkit!</h1>
 <h5>Already have an account? <a href="/accounts/login/">Log In Here</a></h5>
 <form class="form-stacked" action="/accounts/register/" method="POST" class="signup">
 	{% csrf_token %}
-	{{form}}
+	{{form|crispy}}
 	<div class="offset1 tower">
 		<input type="submit" class="btn primary" value="Sign Up"/>
 	</div>

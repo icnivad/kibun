@@ -4,7 +4,9 @@
 	{% include 'registration/login_invitation.html' %}
 	<h1>How Different Activities Affect Your Mood</h1>
 	
+	<!--
 	<h2>Best Activities for Your Mood</h2>
+	-->
 	<table class="table table-striped">
 	<thead>
 		<tr>
@@ -12,13 +14,15 @@
 		</tr>
 	</thead>
 	<tbody>
-		{% for act in best_activities|slice:":7" %}
+		
+		{% for act in best_activities %}
 		<tr>
-		<td><a href="/activity/detail/{{act.id}}">{{act.activity}}</a></td><td>{{act.moodChange}}</td><td>{{act.count}}</td>
+		<td><a href="/activity/detail/{{act.id}}">{{act.activity}}</a></td><td>{{act.moodChange|stringformat:"+.2f" }}</td><td>{{act.count}}</td>
 		</tr>
 		{% endfor %}
 	</tbody>
 	</table>
+	<!--
 	<h2>Activities Which Are Not as Good For Your Mood</h2>
 	<table class="table table-striped">
 	<thead>
@@ -34,7 +38,7 @@
 		{% endfor %}
 	</tbody>
 	</table>
-	
+	-->
 	
 	<!--
 	<h2>Best Mood This Week</h2>
