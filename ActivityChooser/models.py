@@ -58,17 +58,16 @@ class ActivityTag(UserData, SessionStashable):
 	
 class ActivityManager(models.Manager):
 	def all_with_permission(self, request):
-		defActs=self.filter(is_default=True)
 		activities=[]
 		if request.user.is_active:
 			activities=self.filter(user=request.user)
 		else:
 			activities=Activity.get_stashed_in_session(request.session)
-		return (defActs | activities)
+		return activities
 	
 	def get_with_permission(self, request, pk):
 		activity=self.get(pk=pk)
-		if ((activity.is_default) or (activity.user==request.user) or (activity.stashed_in_session(request.session))):
+		if ((activity.user==request.user) or (activity.stashed_in_session(request.session))):
 			return activity
 		return None
 	
@@ -84,7 +83,7 @@ class Activity(UserData, SessionStashable):
 	name=models.CharField(max_length=200, verbose_name="Activity Name")
 	objects=ActivityManager()
 	
-	is_default=models.BooleanField(default=False)
+	is_default=models.BooleanField(default=False) #should remove this soon
 	
 	#django-sessionstashable
 	session_variable='activity_stash'
