@@ -30,7 +30,7 @@ def chooseActivity(request):
 				newActivity.save(request)
 				pvalues['activity']=newActivity.id
 		aform=ActivityChooseForm(pvalues, request=request)
-		
+
 		if aform.is_valid():
 			aRating=aform.save(commit=False)
 			aRating.preDateTime=datetime.datetime.now()

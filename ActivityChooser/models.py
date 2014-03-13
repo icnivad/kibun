@@ -62,15 +62,20 @@ class ActivityManager(models.Manager):
 		if request.user.is_active:
 			activities=self.filter(user=request.user)
 		else:
-			activities=Activity.get_stashed_in_session(request.session)
+			activities=self.filter(is_default=True)
+			activities=activities | Activity.get_stashed_in_session(request.session)
 		return activities
 	
 	def get_with_permission(self, request, pk):
 		activity=self.get(pk=pk)
-		if ((activity.user==request.user) or (activity.stashed_in_session(request.session))):
-			return activity
-		return None
+		if request.user.is_active:
+			if activity.user==request.user:
+				return activity
+		else:
+			if (activity.is_default or activity.stashed_in_session(request.session)):
+				return activity
 	
+	#need to improve delete with permision as well -> actually should probably just stop showing images of deleted activities in template
 	def delete_with_permission(self, request, pk):
 		activity=self.get(pk=pk)
 		if ((activity.user==request.user) or (activity.stashed_in_session(request.session))):
@@ -152,7 +157,10 @@ class ActivityRatingManager(models.Manager):
 		if ((arating.user==request.user) or (arating.stashed_in_session(request.session))):
 			return arating
 		return None
-		
+	
+	
+	# It is possible that an activityrating created with a default activity may be displayed ,
+	#even though the user doesn't have access to that activity.  Could be a source of errors and confusion.  Not sure what to do about it.
 	def all_with_permission(self, request):
 		aratings=ActivityRating.get_stashed_in_session(request.session)
 		if request.user.is_active:
@@ -221,6 +229,33 @@ class ActivityRating(UserData, SessionStashable):
 		else:
 			super(ActivityRating, self).save()
 			self.stash_in_session(request.session)
+	
+	@classmethod
+	def reparent_all_my_session_objects(cls, session, user, request):
+		"Go over the objects stashed in session and set user as their creator_field. Then clear the sessions store."
+		cls.get_stashed_in_session(session).update(**{cls.creator_field: user})
+		for actRating in cls.get_stashed_in_session(session):
+			act=actRating.activity
+			if act.is_default:
+				print act.name
+				print user.pk
+				for a in Activity.objects.all_with_permission(request):
+					print a.name
+					print a.user
+					print a.pk
+					print a.user.pk
+				user_activities=Activity.objects.filter(name=act.name, user=user)
+				if user_activities.count()==0:
+					act.is_default=0
+					act.pk=None
+					act.save(request)
+					actRating.activity=act
+					actRating.save(request)
+				else: #should check to make sure there's only one activity, but that's for another day
+					newAct=user_activities[0]
+					actRating.activity=newAct
+					actRating.save(request)
+		cls.clear_stashed_objects(session)
 		
 	
 		
